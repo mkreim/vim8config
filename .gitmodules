@@ -1,9 +1,6 @@
 [submodule "vim/pack/pluginRepos/start/VisIncr"]
 	path = vim/pack/pluginRepos/start/VisIncr
 	url = https://github.com/vim-scripts/VisIncr.git
-[submodule "vim/pack/pluginRepos/Colour-Sampler-Pack"]
-	path = vim/pack/pluginRepos/Colour-Sampler-Pack
-	url = https://github.com/vim-scripts/Colour-Sampler-Pack.git
 [submodule "vim/pack/pluginRepos/start/vim-colors-solarized"]
 	path = vim/pack/pluginRepos/start/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
