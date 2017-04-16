@@ -1,0 +1,130 @@
+% =========================================================================
+%       Filename:  [:VIM_EVAL:]expand("%:t")[:END_EVAL:] 
+%        Created:  [:VIM_EVAL:]strftime("%c")[:END_EVAL:]
+%         Author:  ([:VIM_EVAL:]strftime('%Y')[:END_EVAL:]), Dr. Michael Kreim michael.kreim@da-cons.de
+%        Contact:  support@da-cons.de
+%        Company:  da-cons GmbH http://www.da-cons.de/
+% =========================================================================
+% header {{{ <<<
+\documentclass[
+	11pt,             % 10pt, 11pt, 12pt The font size of the document.
+	a4paper,          % a4paper a5paper  paper format.
+                      % landscape Sets landscape format
+	notitlepage,      % titlepage, notitlepage: seperate titlepage or not
+	final,            % draft, final: draft-version or a final version
+	twoside,          % oneside, twoside: two-sided or one-sided format
+	onecolumn,        % onecolumn, twocolumn text in 1 or 2 columns
+	footexclude, headsepline, headinclude, bibtotocnumbered, normalheadings
+	]{scrartcl}
+% packages
+%\usepackage[latin1]{inputenc}  % latin1  -- SuSe, Debian < Etch
+%\usepackage[ansinew]{inputenc} % ansinew -- windows
+\usepackage[utf8]{inputenc}     % utf8    -- Debian >= Etch 
+%\usepackage[babel,german=quotes]{csquotes}      % German   Quotes   
+\usepackage[babel,english=british]{csquotes}   % Britsh   Quotes
+%\usepackage[ngerman]{babel} % New German Spelling, Umlaute, etc. 
+\usepackage[english]{babel} % New German Spelling, Umlaute, etc. 
+\usepackage[left=25mm,right=25mm,top=30mm,bottom=40mm]{geometry}
+\usepackage{bibgerm}  % needed for \bibliographystyle{gera*}
+\usepackage{graphicx}
+\usepackage{verbatim} % Usage: \begin{verbatim} some code \end{verbatim}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{upgreek}
+\usepackage{longtable}     % tabs over more than one page
+% Source-Code printer for LaTeX
+\usepackage{listings}
+% \lstset{language=} 
+% \lstset{basicstyle=\small}
+% \lstset{numbers=left,numberstyle=\tiny,stepnumber=1,numbersep=5pt}
+% \lstset{breaklines=true}
+% This is 'SCHUSTER.STY' as of 25. March 1990
+\clubpenalty = 10000
+\widowpenalty = 10000 \displaywidowpenalty = 10000
+% Footer and Header
+\usepackage[automark]{scrpage2}
+%xhead[chapter page]{other pages}
+\ihead[]{\leftmark}        % inner
+\chead[]{}                 % center Header
+%\ohead[]{\rightmark}       % outer
+\ohead[]{}       % outer
+\ifoot[\version]{\version} % inner
+\cfoot[]{}                 % center Footer
+\ofoot[\thepage]{\thepage} % outer
+\addtokomafont{caption}{\footnotesize} % smaller fonts
+\setcounter{secnumdepth}{2} \setcounter{tocdepth}{1}
+\renewcommand{\rmdefault}{cmr}
+\setlength{\parskip}{\medskipamount} 	% Abstand Paragraphen
+\setlength{\parindent}{0pt}				% Einrückung Paragraphen
+% own commands
+%     Syntax:
+%     \newcommand{\Name}[Anzahl]{Definition}
+%     Parameter: - Name  ein Befehlsname. 
+%                - Anzahl (optional)  Zahl zwischen 1 und 9. 
+%                - Definition eine Befehlsdefinition. 
+\newcommand{\laplace}{\operatorname \Delta}
+\newcommand{\angstrom}{\textnormal{\AA}}
+\newcommand{\tn}[1]{\textnormal{#1}}
+\newcommand{\vek}[1]{\bm{#1}}
+\newcommand{\ToDo}[1]{\fbox{ToDo#1}\marginpar{\textbf{?\textquestiondown?}}}
+\newcommand{\IC}{\mathbb{C}} 
+\newcommand{\IN}{\mathbb{N}}
+\newcommand{\IQ}{\mathbb{Q}}
+\newcommand{\IR}{\mathbb{R}}
+\newcommand{\IZ}{\mathbb{Z}}
+\newcommand{\IP}{\mathbb{P}}
+\newcommand{\IE}{\mathbb{E}}
+\newcommand{\IV}{\mathbb{V}}
+\newcommand{\II}{\mathbb{I}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\hs}[1]{\hspace{#1 mm}}
+\newcommand{\vs}[1]{\vspace{#1 mm}}
+\newcommand{\Ord}[1]{\mathcal{O} \! \left(#1\right)}
+\newcommand{\pt}{\partial_{t}}
+\newcommand{\px}{\partial_{x}}
+\newcommand{\expec}[1]{\mathbb{E}\left[ #1 \right]}
+\newcommand{\var}[1]{\mathbb{V}\left[ #1 \right]}
+\newcommand{\order}[1]{\mathcal{O}\left( #1 \right)}
+\newcommand{\entspricht}{\stackrel{\scriptscriptstyle\wedge}{=}}
+\DeclareMathOperator{\diag}{\text{\texttt{diag}}}
+\DeclareMathOperator{\ggT}{ggT}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\trace}{trace}
+\DeclareMathOperator{\disc}{disc}
+\DeclareMathOperator{\Cov}{Cov}
+\setlength{\marginparwidth}{10mm}
+
+%% mcode.sty
+%%   - bw  if you intend to print the document (highlighting done
+%%         via text formatting (bold, italic) and shades of gray)
+%%   - numbered  if you want line numbers
+%%   - autolinebreaks  if you want  the package to  automatically
+%%          wrap your  code.  This is buggy as it  may well break
+%%          break syntax and it  doesn't work well with comments.
+%%          You REALLY should wrap your code manually.
+%%   - useliterate   if you want  some characters / relations  in
+%%          your code to be replace with something more readable.
+%%          Example: ~= becomes $\neq$, >= becomes $\geq$,  delta
+%%          becomes $\delta$ and so on.
+%%   - framed  if you want a frame  around the source code blocks
+%%   - final  if you have  ``gloablly'' set the draft option, the
+%%         listings package will  not output the code at all.  to
+%%         force it to  do so anyway,  load this package with the
+%%         final option (passes the ``final'' on to listings).
+%% Example: \lstinputlisting{script.m}
+\usepackage[numbered, autolinebreaks]{mcode}
+% }}} >>>
+
+\title{<++>}
+\author{Michael Kreim\\\small{\texttt{<michael.kreim@da-cons.de>}}}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\end{document}
+% --- EOF -----------------------------------------------------------------

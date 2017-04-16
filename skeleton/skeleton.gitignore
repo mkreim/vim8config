@@ -1,0 +1,45 @@
+# =========================================================================
+#       Filename:  [:VIM_EVAL:]expand("%:t")[:END_EVAL:] 
+#        Created:  [:VIM_EVAL:]strftime("%c")[:END_EVAL:]
+#          Author:  ([:VIM_EVAL:]strftime('%Y')[:END_EVAL:]), Dr. Michael Kreim michael.kreim@da-cons.de
+#         Contact:  support@da-cons.de
+#         Company:  da-cons GmbH http://www.da-cons.de/
+# =========================================================================
+
+# editor temp files
+.*.swp
+*.*~
+
+# latex temp files
+*.aux
+*.log
+*.bbl
+*.blg
+*.toc
+*.out
+*.tdo
+*.idx
+*.ilg
+*.ind
+*.loa
+*.lof
+*.lot
+*.loe
+*.thm
+
+# matlab temp files
+*.mexa64
+
+# python temp files
+*.pyc
+
+# c / c++ temp files and binaries
+*.o
+*.bin
+
+# hdf5 output files
+*.h5
+
+# project specific files
+
+# --- EOF ---------------------------------------------------------------------

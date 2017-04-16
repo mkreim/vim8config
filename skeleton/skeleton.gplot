@@ -1,0 +1,42 @@
+#!/usr/local/linux/bin/gnuplot
+# =========================================================================
+#       Filename:  [:VIM_EVAL:]expand("%:t")[:END_EVAL:] 
+#    Description:  
+#        Created:  [:VIM_EVAL:]strftime("%c")[:END_EVAL:]
+#         Author:  ([:VIM_EVAL:]strftime('%Y')[:END_EVAL:]), Michael Kreim http://www.perfect-kreim.de/
+# =========================================================================
+
+set border 31 lt -1 lw 1.00
+set dummy x,y
+set format x "%g"
+set format y "%g"
+set format x2 "%g"
+set format y2 "%g"
+set format z "%g"
+set format cb "%g"
+
+set lmargin -1
+set bmargin -1
+set rmargin -1
+set tmargin -1
+set encoding iso_8859_1
+
+set size ratio 0.5
+set terminal postscript eps color enhanced "Helvetica" 16
+set output "[:VIM_EVAL:]expand("%:t")[:END_EVAL:].ps"
+
+set xlabel "{/Helvetica-Oblique x} / {e}"
+set ylabel "{/Helvetica-Oblique y} / {e}"
+set nokey
+
+#set logscale y
+#set format y  "%4.f"
+
+# set xtics 0,5,1000
+# set ytics  nomirror -10,0.5,10
+# set xrange [0:75]
+# set yrange [0:3.5]
+
+plot  "[:VIM_EVAL:]expand("%:t")[:END_EVAL:].dat" w l lt 1 lw 1 lc rgbcolor "black"
+
+# --- EOF -----------------------------------------------------------------
