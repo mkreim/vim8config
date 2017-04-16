@@ -27,6 +27,27 @@ find . -name "*.hpp" | xargs ctags --append --declarations --globals --members -
 find . -name "*.cpp" | xargs ctags --append --declarations --globals --members -o /home/mkreim/bin/opencv/opencv.tags -T --update
 ```
 
+# add submodules
+```
+git submodule add https://github.com/vim-scripts/VisIncr.git vim/pack/pluginRepos/start/VisIncr
+git add .gitmodules vim/pack/pluginRepos/start/VisIncr/
+git commit -m "added plugin VisIncr"
+```
+
+# update submodules
+```
+git submodule update --remote --merge
+git commit -m "updated submodules"
+```
+
+# removing submodules
+```
+git submodule deinit vim/pack/pluginRepos/start/VisIncr
+git rm vim/pack/pluginRepos/start/VisIncr
+rm -Rf .git/modules/vim/pack/pluginRepos/start/VisIncr
+git commit -m "removed plugin VisIncr"
+```
+
 # install stuff
 
 ```
