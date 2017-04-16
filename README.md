@@ -60,8 +60,9 @@ sudo apt-get install pep8
  - https://www.reddit.com/r/vim/comments/53tepo/what_are_some_of_the_best_plugins_to_use_vim_8/
 
 # plugins
- - VisIncr
- - colorsamplerpack
+ - VisIncr https://github.com/vim-scripts/VisIncrcl
+ - Colour-Sampler-Pack https://github.com/vim-scripts/Colour-Sampler-Pack
+ - vim-colors-solarized https://github.com/altercation/vim-colors-solarized
  - csapprox ?
  - fugitive
  - git ?
@@ -75,7 +76,6 @@ sudo apt-get install pep8
  - tagbar
  - taglist
  - tasklist
- - vim-colors-solarized
  - vim-fswitch ?
  - vimwiki
 
