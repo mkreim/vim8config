@@ -1,0 +1,45 @@
+# =========================================================================
+#       Filename:  .gitignore 
+#        Created:  Sun Apr 16 20:18:50 2017
+#          Author:  (2017), Dr. Michael Kreim michael.kreim@da-cons.de
+#         Contact:  support@da-cons.de
+#         Company:  da-cons GmbH http://www.da-cons.de/
+# =========================================================================
+
+# editor temp files
+.*.swp
+*.*~
+
+# latex temp files
+*.aux
+*.log
+*.bbl
+*.blg
+*.toc
+*.out
+*.tdo
+*.idx
+*.ilg
+*.ind
+*.loa
+*.lof
+*.lot
+*.loe
+*.thm
+
+# matlab temp files
+*.mexa64
+
+# python temp files
+*.pyc
+
+# c / c++ temp files and binaries
+*.o
+*.bin
+
+# hdf5 output files
+*.h5
+
+# project specific files
+
+# --- EOF ---------------------------------------------------------------------
