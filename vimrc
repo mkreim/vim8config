@@ -1,11 +1,3 @@
-" pathogen.vim
-" adds the plugins in ~/.vim/bundle/
-" https://github.com/tpope/vim-pathogen
-    filetype off
-    call pathogen#infect()
-    call pathogen#runtime_append_all_bundles()
-    call pathogen#helptags()
-
 " options 
     syntax on
     set vb
@@ -66,42 +58,35 @@
     " ]z move to end of open fold.
     set foldmethod=marker
 
-" vim path
-    set path+=~/devel/cpp/libMKcpp/
-    set path+=~/devel/matlab/libMKmatlab/
-    set path+=~/devel/python/libMKpython/
-
 " key short cuts
     nmap - g<C-]>
     nmap _ <C-T>
     map <F2> :set spell!<CR><Bar>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
     imap <F2> <ESC>:set spell!<CR><Bar>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>A
-    source ~/config/vimconfig/SendToTmux/SendToTmux.vim
+    source ~/config/vim8config/SendToTmux/SendToTmux.vim
     map <F12>  <ESC>:wa<CR>:call SendCMDToTmuxSession()<CR>
-    map <F11>  <ESC>:wa<CR>:call SendCurrentLineToTmuxSession()<CR>
-    map <F10>  <ESC>:wa<CR>:call SendCurrentLineToTmuxSession()<CR>
+    "map <F11>  <ESC>:wa<CR>:call SendCurrentLineToTmuxSession()<CR>
+    "map <F10>  <ESC>:wa<CR>:call SendCurrentLineToTmuxSession()<CR>
     imap <F12>  <ESC>:wa<CR>:call SendCMDToTmuxSession()<CR>
-    imap <F11>  <ESC>:wa<CR>:call SendCurrentLineToTmuxSession()<CR>
-    imap <F10>  <ESC>:wa<CR>:call SendCurrentLineToTmuxSession()<CR>
-    
+    "imap <F11>  <ESC>:wa<CR>:call SendCurrentLineToTmuxSession()<CR>
+    "imap <F10>  <ESC>:wa<CR>:call SendCurrentLineToTmuxSession()<CR>
+
     source ~/config/vimconfig/MyCpp/MyCpp.vim
-    iab irev <C-R>=MyReviewComment()<CR>
+    "iab irev <C-R>=MyReviewComment()<CR>
 
     " C / C++ development
     map  <F8> <ESC>:TlistToggle<CR>
     imap <F8> <ESC>:TlistToggle<CR>
     map  <F7> <ESC>:w<CR>:FSSplitAbove<CR>
     imap <F7> <ESC>:w<CR>:FSSplitAbove<CR>
-    map  <F4> <ESC>:tabnew<CR>:Project<CR>
-    imap <F4> <ESC>:tabnew<CR>:Project<CR>
+    "map  <F4> <ESC>:tabnew<CR>:Project<CR>
+    "imap <F4> <ESC>:tabnew<CR>:Project<CR>
 
 
 " abbrevations
     iab idate <C-R>=strftime("%c")<CR>
-    iab kbug !! FIXME / Known Bug: 
     iab ToDo TODO
     iab todo TODO
-    iab mancom manual commit from mango at <C-R>=strftime("%c")<CR>
 
 " color scheme
     if has('gui_running')
@@ -135,10 +120,10 @@
 
 " Integration of the mlint Matlab code checker with the :make command 
 " http://www.vim.org/scripts/script.php?script_id=2407
-    autocmd BufEnter *.m    compiler mlint 
+    autocmd BufEnter *.m    compiler mlint
 " and also for python
     autocmd BufNewFile,BufRead *.py compiler python
-    
+
 " deutsche Umlaute automatisch beim Schreiben von html,htm,inc oder php Dateien ersetzten
     autocmd BufWrite *.[Hh][Tt][Mm][Ll],*.[hH][tT][mM],*.[pP][hH][pP],*.[iI][nN][cC] silent %s/ö/\&ouml;/g
     autocmd BufWrite *.[Hh][Tt][Mm][Ll],*.[hH][tT][mM],*.[pP][hH][pP],*.[iI][nN][cC] silent %s/Ö/\&Ouml;/g
@@ -150,7 +135,7 @@
 
 " VimWiki
     "autocmd BufWritePost *.wiki silent VimwikiAll2HTML "gen HTML when saving
-    let g:vimwiki_list = [{'path': '~/config/vimconfig/VimWiki/vimwiki/', 'path_html': '~/config/vimconfig/VimWiki/vimwiki_html/'}, {'path': '~/todo/wiki/', 'path_html': '~/todo/html/'},{'path': '~/config/vimconfig/VimTippsWiki/'}]
+    let g:vimwiki_list = [{'path': '~/config/vim8config/VimWiki/vimwiki/', 'path_html': '~/config/vim8config/VimWiki/vimwiki_html/'}, {'path': '~/todo/wiki/', 'path_html': '~/todo/html/'}]
     map <leader>to 2<leader>wt
     map <leader>di 2<leader>w<leader>w
 
@@ -179,7 +164,7 @@ source ~/todo/scripts/todo_vimconfig.vim
 
     " OPTIONAL: This enables automatic indentation as you type.
     filetype indent on
-    
+
     " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
     " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
     " The following changes the default filetype back to 'tex':
@@ -199,14 +184,8 @@ source ~/todo/scripts/todo_vimconfig.vim
     au!
     au VimEnter * call IMAP('EAL', "\\begin{align}\<CR>\\label{eq:<++>}\<CR><++>\<CR>\\end{align}<++>", 'tex')
     augroup END
-    
+
 "statuszeile
-"    let g:git_branch_status_head_current=1 " This will show just the current head branch name 
-"    let g:git_branch_status_text="branch:"
-"    let g:git_branch_status_nogit="no branch"
-"    let g:git_branch_status_around=""
-    " let g:git_branch_status_ignore_remotes=1
-    " let g:git_branch_check_write=<something>
     set laststatus=2
     set statusline=
     set statusline+=%-3.3n\                      " buffer nummer
@@ -214,7 +193,6 @@ source ~/todo/scripts/todo_vimconfig.vim
     set statusline+=%h%m%r%w                     " status flags
     set statusline+=\[%{strlen(&ft)?&ft:'none'}] " dateityp
     set statusline+=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\"} " fileencoding
-"    set statusline+=\[%{GitBranchInfoString()}]  " git branch
     set statusline+=\[%{fugitive#statusline()}]  " git branch
     set statusline+=%=                           " folgendes rechts
     set statusline+=0x%-8B                       " hex-wert des zeichens
@@ -313,14 +291,13 @@ let OmniCpp_MayCompleteDot      = 1 " autocomplete after .
 let OmniCpp_MayCompleteArrow    = 1 " autocomplete after ->
 let OmniCpp_MayCompleteScope    = 1 " autocomplete after ::
 let OmniCpp_SelectFirstItem     = 0
-let OmniCpp_DefaultNamespaces   = ["std", "_GLIBCXX_STD"]
+let OmniCpp_DefaultNamespaces   = ["std", "_GLIBCXX_STD", "cv", "pheno"]
 " automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 " configure tags - add additional tags here or comment out not-used ones
-set tags+=~/config/vimconfig/tags/cpp.ctags
-set tags+=~/config/vimconfig/tags/opengl.ctags
-set tags+=~/config/vimconfig/tags/python.ctags
+set tags+=/home/mkreim/bin/opencv/opencv.tags
+set tags+=/home/mkreim/PhenoScreen/ps.tags
 " END OF OmniCppComplete
 
 " Get help on Python libraries
@@ -335,11 +312,11 @@ if has("python")
 python << EOF
 import sys
 import vim
-vim.command("let g:pydoc_path=\'" + sys.prefix + "/lib/pydoc.py\'")
+vim.command("let g:pydoc_path=\'/usr/lib/python2.7/pydoc.py\'")
 EOF
 else
   " manually set the path to pydoc
-  let g:pydoc_path = "/usr/lib64/python/pydoc.py"
+  let g:pydoc_path = "/usr/lib/python2.7/pydoc.py"
 endif
 command! -nargs=1 Pyhelp :call ShowPydoc(<f-args>)
 function! ShowPydoc(module)
@@ -425,7 +402,7 @@ augroup END
       " normal mode is harder because of the optional count - must use a function
       exec "nnoremap <silent> <buffer> J :<C-U>call JoinWithLeader(v:count, '".l:leaderText."')<CR>"
     endfunction
-    
+
     au BufWinEnter *.m call MapJoinWithLeaders('%')
 " END OF Remap join to merge comment lines
 
@@ -466,6 +443,8 @@ au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
 map <leader>n :NERDTreeToggle<CR>
+map <F10>  :NERDTreeToggle<CR>
+imap <F10> <Esc>:NERDTreeToggle<CR>
 " I also included the py.test vim plugin for those who prefer it. 
 " This plugin has a lot more functionality including executing 
 " individual tests by class, file, or method. You can also cycle
