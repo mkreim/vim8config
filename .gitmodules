@@ -10,3 +10,6 @@
 [submodule "vim/pack/pluginRepos/start/CSApprox"]
 	path = vim/pack/pluginRepos/start/CSApprox
 	url = https://github.com/vim-scripts/CSApprox.git
+[submodule "vim/pack/pluginRepos/start/fugitive"]
+	path = vim/pack/pluginRepos/start/fugitive
+	url = https://github.com/tpope/vim-fugitive.git
