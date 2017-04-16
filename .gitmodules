@@ -7,3 +7,6 @@
 [submodule "vim/pack/pluginRepos/start/Colour-Sampler-Pack"]
 	path = vim/pack/pluginRepos/start/Colour-Sampler-Pack
 	url = https://github.com/vim-scripts/Colour-Sampler-Pack.git
+[submodule "vim/pack/pluginRepos/start/CSApprox"]
+	path = vim/pack/pluginRepos/start/CSApprox
+	url = https://github.com/vim-scripts/CSApprox.git
