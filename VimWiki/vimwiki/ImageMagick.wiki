@@ -1,0 +1,22 @@
+= Image Magick =
+ * [http://www.linux-user.de/ausgabe/2008/02/040/ LinuxUser 02/2008: Bildbearbeitung auf der Konsole]
+ * [http://www.linux-user.de/ausgabe/2005/10/052-imagemagick/  LinuxUser 10/2005: Bildbearbeitung auf der Shell]
+ * [http://www.imagemagick.org/Usage/ Examples of ImageMagick Usage]
+
+== Examples ==
+
+=== montage several images into one image ===
+{{{
+# 4 images as 2x2 matrix
+montage -mode Concatenate -tile 2x2 fig1.png fig2.png fig3.png fig4.png
+out.png
+
+# 2 images as 1x2 matrix
+montage -tile 1x2 -geometry "+0+100>" fig1.png fig2.png out.png
+}}}
+
+=== set specific size and DPI by convert ===
+{{{
+convert -trim -density 1200x1200 -units PixelsPerInch -scale 2400
+fig.eps fig.png
+}}}

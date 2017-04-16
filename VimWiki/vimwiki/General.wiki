@@ -1,0 +1,50 @@
+= general information on programming languages =
+
+== general information ==
+ *[http://www.sans.org/top25errors/ 25 Most Dangerous Programming Errors]
+ *[http://openbook.galileocomputing.de/oop/ Objektorientierte Programmierung von Bernhard Lahres, Gregor Rayman]
+
+== TCL ==
+ *[http://wiki.tcl.tk/ Tcler's Wiki]
+ *[http://www.tcl.tk/man/tcl8.5/tutorial/tcltutorial.html Tcl Tutorial]
+ *[http://tmml.sourceforge.net/doc/tcl/index.html Tcl Reference Manual]
+
+== octave/matlab ==
+ * [http://www.gnu.org/software/octave/doc/interpreter/ 575 page manual]
+
+== Fortran ==
+ *[http://www.fz-juelich.de/jsc/docs/bhb/bhb_html/d0124/fortran_html.html G. Groten: Fortran 90/95 Kurs für die Ausbildung von MTAs, Jülich 1999]
+ *[http://www.personal.psu.edu/faculty/h/d/hdk/fortran.html Fortran Resources and Fortran 77/90/95 Compilers for Windows and Linux]
+ *[http://www.cisl.ucar.edu/tcg/consweb/Fortran90/F90Tutorial/tutorial.html Z. Dodson: A Fortran 90 Tutorial, Computer Science Department University of New Mexico]
+ *[http://wwwasdoc.web.cern.ch/wwwasdoc/f90.html M. Metcalf: Fortran 90 CNL Articles, Oxford, 1995]
+ *[http://www.hpctec.mcc.ac.uk/hpctec/courses/Fortran90/F90course.html MAN T&EC: Fortran 90 - A Conversion Course for Fortran 77 Programmers]
+ *[http://en.wikibooks.org/wiki/Fortran Fortran - From Wikibooks, the open-content textbooks collection, 2008]
+
+== Fortran and C++ ==
+ *[http://www.neurophys.wisc.edu/comp/docs/notes/not017.html  R. Kochhar: Fortran and C/C++ Mixed Programming, Univ. of Wisconsin - Madison, 1999]
+ *[http://www.objexx.com/Fortran_to_Cpp.html Fortran to C++ Conversion]
+ *[http://www.yolinux.com/TUTORIALS/LinuxTutorialMixingFortranAndC.html G. Ippolito: Using C/C++ and Fortran together, 2006]
+ *[http://www.math.utah.edu/software/c-with-fortran.html N. Beebe: Using C and C++ with Fortran, University of Utah, 2001]
+ *[http://ubiety.uwaterloo.ca/~tveldhui/papers/DrDobbs2/drdobbs2.html T.  Veldhuizen: Scientific Computing: C++ versus Fortran, University of Waterloo, Canada, 1997]
+ *[http://www.amath.washington.edu/~lf/software/CompCPP_F90SciOOP.html J.  Cary, S. Shasharina, J. Cummings, J. Reynders, P. Hinker: Comparison of C++ and Fortran 90 for Object-Oriented Scientific Programming, University of Colorado,  Los Alamos National Laboratory, Dakota Scientific Software, 1996]
+
+== Perl ==
+ * [http://de.selfhtml.org/perl/index.htm Selhtml - Perl]
+ * [http://perldoc.perl.org/ Perl version 5.10.0 documentation]
+
+== bash / sh ==
+ *[http://tldp.org/LDP/abs/html/ Advanced Bash-Scripting Guide]
+ *[http://www.shelldorado.com/ Heiner's SHELLdorado]
+ *[http://www.regular-expressions.info/reference.html Regular Expression Basic Syntax Reference]
+
+== html / css / php / javascript ==
+ *[http://de.selfhtml.org/html/index.htm HTML/XHTML]
+ *[http://de.selfhtml.org/css/index.htm Stylesheets (CSS)]
+ *[http://www.php.net/manual/en/ PHP Manual]
+ *[http://de.selfhtml.org/javascript/index.htm JavaScript/DOM]
+
+== code documentation ==
+all these programms claim to understand at least C++ and fortran
+ * [http://www.stack.nl/~dimitri/doxygen/index.html Doxygen]
+ * [http://www.xs4all.nl/~rfsber/Robo/robodoc.html ROBODoc]
+ * [http://www.naturaldocs.org/ Natural Docs]

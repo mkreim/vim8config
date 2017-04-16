@@ -1,0 +1,158 @@
+= Matlab =
+
+== Mex compilation Matlab2012a ==
+I have encoutered problems trying to compile some C files using the new Matlab 2012a, specifically it complains about libstdc++. In $MATLAB_ROOT/sys/os/glxna and $MATLAB_ROOT/bin/gxna64 I've moved the libraries into and old directory and made symbolic links to the current version from /usr/lib. It did compile OK, but mesoRD does not seem to be usable software!
+
+== read a hdf5 file into matlab ==
+{{{
+>> d = h5read('test_file.h5', '/testDoubleArray');
+>> d
+
+d =
+
+  Columns 1 through 10
+
+    0.8402    0.4774    0.0163    0.5129    0.5267    0.5260    0.2383    0.5316    0.6879    0.9565
+    0.3944    0.6289    0.2429    0.8391    0.7699    0.0861    0.9706    0.0393    0.1660    0.5886
+    0.7831    0.3648    0.1372    0.6126    0.4002    0.1922    0.9022    0.4376    0.4401    0.6573
+    0.7984    0.5134    0.8042    0.2960    0.8915    0.6632    0.8509    0.9318    0.8801    0.8587
+    0.9116    0.9522    0.1567    0.6376    0.2833    0.8902    0.2667    0.9308    0.8292    0.4396
+    0.1976    0.9162    0.4009    0.5243    0.3525    0.3489    0.5398    0.7210    0.3303    0.9240
+    0.3352    0.6357    0.1298    0.4936    0.8077    0.0642    0.3752    0.2843    0.2290    0.3984
+    0.7682    0.7173    0.1088    0.9728    0.9190    0.0200    0.7602    0.7385    0.8934    0.8148
+    0.2778    0.1416    0.9989    0.2925    0.0698    0.4577    0.5125    0.6400    0.3504    0.6842
+    0.5540    0.6070    0.2183    0.7714    0.9493    0.0631    0.6677    0.3540    0.6867    0.9110
+
+  Columns 11 through 20
+
+    0.4825    0.7860    0.1032    0.2942    0.0745    0.6395    0.5733    0.8705    0.3591    0.5770
+    0.2158    0.3075    0.1261    0.2323    0.9501    0.7597    0.7556    0.0723    0.5525    0.8776
+    0.9503    0.4470    0.4954    0.5845    0.0525    0.0935    0.0519    0.0042    0.5794    0.7478
+    0.9201    0.2261    0.7605    0.2444    0.5216    0.1349    0.1578    0.9231    0.4526    0.6289
+    0.1477    0.1875    0.9848    0.1524    0.1762    0.5202    1.0000    0.5939    0.6874    0.0354
+    0.8811    0.2762    0.9350    0.7321    0.2401    0.0782    0.2043    0.1804    0.0996    0.7478
+    0.6411    0.5564    0.6844    0.1255    0.7978    0.0699    0.8900    0.1631    0.5308    0.8332
+    0.4320    0.4165    0.3832    0.7935    0.7327    0.2047    0.1255    0.3917    0.7573    0.9254
+    0.6196    0.1696    0.7498    0.1641    0.6566    0.4614    0.9978    0.9130    0.3043    0.8733
+    0.2811    0.9068    0.3687    0.7451    0.9674    0.8197    0.0541    0.8197    0.9922    0.8310
+}}}
+
+== Variable Parameter Number in functions ==
+ *  see: [http://www.mathworks.com/help/techdoc/ref/varargin.html Matlab R2010b Documentation varargin]
+{{{
+    function x=varparamfunction(a,b, varargin)
+        if nargin > 3 || size(varargin,2) > 1
+            disp('ERROR: To many arguments');
+            return
+        elseif size(varargin,2) == 0 || varargin{1} == 0
+            x = a + b;
+        elseif size(varargin,2) == 1 && varargin{1} == 1
+            x = a * b;
+        else
+            disp('ERROR: Wrong usage of options.');
+            return
+        end
+}}}
+This code produces in Matlab the following output:
+{{{
+    >> varparamfunction(2, 17)
+        ans = 19
+    >> varparamfunction(2, 17, 0)
+        ans = 19
+    >> varparamfunction(2, 17, 1)
+        ans = 34
+    >> varparamfunction(2, 17, 2)
+        ERROR: Wrong usage of options.
+    >> varparamfunction(2, 17, 2, 3)
+        ERROR: To many arguments
+}}}
+
+== check if a number is numerical zero ==
+{{{
+    number = 0;
+    odeopt  = odeset('RelTol',1e-10,'AbsTol',1e-10);
+    if (number > 0+odeopt.AbsTol) || number < 0-odeopt.AbsTol)
+            fprintf('WARNING: number is not zero\n');
+    end
+}}}
+
+== using diag to assemble matrices == 
+{{{
+    S = 10; % matrix dimension
+    A = diag( 1:S      ) + ... % main  diagonal
+        diag( 2:S  , +1) + ... % upper diagonal 
+        diag( 1:S-1, +1);      % lower diagonal 
+}}}
+
+== calculate the expectation of a distribution P(x) ==
+http://upload.wikimedia.org/math/7/b/4/7b4bdfdc10568cc64860f2784ad99caf.png
+ * [http://de.wikipedia.org/wiki/Erwartungswert DE Wikipedia: Erwartungswert]
+{{{
+    P                                     % distribution 
+    xs, xh, xe                            % start value, step size and end value of x
+    eps = 1e-10;                          % numeric error tolerance
+    if sum(P) > 1+eps || sum(P) < 1-eps   % distributions sum up to 1 (with numeric errors < eps),
+        disp('P is not an distribution'); % but matlab tends to make rounding errors so assume, 
+    else                                  % that P sums up to a number in the interval [1-eps, 1+eps]
+        E = sum((xs:xh:xe) .* P);         % Expectation = \sum_x (x*P)
+    end                                   % \operatorname{E}(X) = \sum_{i\in I} x_i p_i=\sum_{i \in I} x_i P(X=x_i)
+}}}
+
+
+== plotting command collection  ==
+{{{
+    figure('Name','[something]','WindowStyle','docked');
+    % dot   types: . o x + * s d ^ V < > p h
+    % color types: b g r c m y k w
+    % line  types: - : -. --
+    plot(x,y, 'cV-.');
+}}}
+
+
+== Generate a 1D histogram from a 1D set of numbers ==
+{{{
+        S                          % set of numbers
+        l = max(S);                % state space size
+        L = 0:1:l;                 % state space
+        H = histc(S, L)/length(S); % histogram
+        bar(L, H, 'r');            % plot histogram
+}}}
+
+
+== Notizen zu Matlab web seminar 2^48 - Keine Angst vor grossen daten ==
+ * textscan(...) selektiver spalten/zeilen input von ascii dateien
+ * column wise rechnen und speichern oder besser vectorised
+ * plot braucht viel speicher zusaetzlich zu den daten (ca. 2x zusaetzlich)
+ * variablen deklarieren (z.b uint32() etc)
+ * worker der parallel computing toolbox haben jeweils eigenen adressraum
+     * distributed memory 
+ * blogs.mathworks.com/loren/
+
+== Run functions in other directories ==
+=== externalfcn ===
+ * http://www.mathworks.com/matlabcentral/fileexchange/4361
+{{{
+Parses string arguments to enable calls to functions outside of the current workspace. 
+(Function externalfcn must, of course, be defined in the current path.)
+
+EX:
+externalfcn('[x,y] = c:\testdirectory\testfcn(a,b)')
+
+...will call testfcn.m even if 'c:\testdirectory\' is not currently defined on the path.
+}}}
+
+=== EXECIN ===
+ * http://www.mathworks.com/matlabcentral/fileexchange/8518
+{{{
+EXECIN Execute a function or script in different directory.
+  
+ EXECIN(FUNCNAME) will execute function FUNCNAME, which is a string that includes the full path of the function.
+ 
+ [Y1, Y2, ...] = EXECIN(FUNCNAME, X1, X2, ...) allows input and output arguments that are normally allowed by the function FUNCNAME.
+ 
+ Example:
+  [s, out] = execin('C:\mywork dir\testfunction.m', x1, x2);
+
+This is quite similar to Brett Shoelson's EXTERNALFCN. I didn't realize it until I made it. But there are some advantages
+such as ability to call functions without output arguments, and assigning outputs in the caller workspace (not base).
+}}}

@@ -1,0 +1,388 @@
+= Vim =
+
+== Remove ^M / File Format dos <-> unix ==
+{{{
+    :update
+    :e ++ff=dos
+    :set ff=unix
+    :w
+}}}
+* [http://vim.wikia.com/wiki/VimTip26 Vim Tip 26: File format]
+
+== Visual Incrementing ==
+ * [http://mysite.verizon.net/astronaut/vim/index.html#VISINCR Dr Chip's Visual Incrementing]
+
+== How to browse source code ==
+In short: create a ctags databse for your code. Start vim in the
+directory the tags-db is located. Open any source-code file. Place
+cursor on a function call and press CTRL-]. To jump back press CTRL-T.<br>
+Example for generation of a ctags database (for mixed c/fortran code):
+<source lang="bash">
+find ./code/trunk/ -path .svn -prune -o -name "*.[cfCF]*" -print | ctags
+-f tags -L -
+</source>
+If you don't use an english keyboard layout CTRL-] is a litte hard do
+type. I maped it to - and the jump back command to _. If you like this
+mappings place the following in your ''~/.vimrc''.
+<pre>
+nmap - g<C-]>
+nmap _ <C-T>
+</pre>
+By the way ctags understands the following languages:
+<pre>
+ $ ctags --list-maps
+ Asm      *.asm *.ASM *.s *.S *.A51 *.29[kK] *.[68][68][kKsSxX]
+ *.[xX][68][68]
+ Asp      *.asp *.asa
+ Awk      *.awk *.gawk *.mawk
+ BETA     *.bet
+ C        *.c
+ C++      *.c++ *.cc *.cp *.cpp *.cxx *.h *.h++ *.hh *.hp *.hpp *.hxx
+ *.C *.H
+ C#       *.cs
+ Cobol    *.cbl *.cob *.CBL *.COB
+ Eiffel   *.e
+ Erlang   *.erl *.ERL *.hrl *.HRL
+ Fortran  *.f *.for *.ftn *.f77 *.f90 *.f95 *.F *.FOR *.FTN *.F77
+ *.F90 *.F95
+ HTML     *.htm *.html
+ Java     *.java
+ JavaScript *.js
+ Lisp     *.cl *.clisp *.el *.l *.lisp *.lsp *.ml
+ Lua      *.lua
+ Make     *.mak *.mk [Mm]akefile
+ Pascal   *.p *.pas
+ Perl     *.pl *.pm *.plx *.perl
+ PHP      *.php *.php3 *.phtml
+ Python   *.py *.python
+ REXX     *.cmd *.rexx *.rx
+ Ruby     *.rb *.ruby
+ Scheme   *.SCM *.SM *.sch *.scheme *.scm *.sm
+ Sh       *.sh *.SH *.bsh *.bash *.ksh *.zsh
+ SLang    *.sl
+ SML      *.sml *.sig
+ SQL      *.sql
+ Tcl      *.tcl *.tk *.wish *.itcl
+ Vera     *.vr *.vri *.vrh
+ Verilog  *.v
+ Vim      *.vim
+ YACC     *.y
+ YCP      *.ycp
+</pre>
+
+== random collection of vim shortcuts and tips ==
+* s 	substitute the current character
+* S 	substitute the current line
+* r 	replace the current character
+* R 	replace continuous characters
+* w 	move the cursor to the next word
+* } 	move to to the next paragraph
+* 3fh 	move to the 3rd occurrence of the letter 'h'
+* h 	move left
+* j 	move down
+* k 	move up
+* l 	move right
+* ctrl-o jump back to the previous location
+* ctrl-i jump forward to the next location again.
+* ^ moves to the start of the line
+* $ moves to the end of the line
+* ctrl-b moves one screen up
+* ctrl-f moves one screen down
+* H to jump as 'h'igh as possible (first line of the window)
+* M to jump to the 'm'iddle of the window
+* L to jump as 'l'ow as possible (last line being displayed)
+* nG jump to line n
+* e move to the 'e'nd of the next word
+* b move one word 'b'ackward
+* ( move to the next sentence
+* ) move to the previous sentence
+* Use ma to create a mark named 'a'. Press 'a  and Vim jumps to the line
+where that mark was located. You can use any alphabet (a-zA-Z) to name a
+mark which means you can have up to 52 named marks for each file.
+* ~ flip the case of the text
+* d delete
+* y yank
+* p paste
+* u undo
+* ctrl-r redo
+* ap to select 'a' 'p'aragraph
+* [http://www.swaroopch.com/notes/Vim_en:More_Editing More Editing]
+* Scriping: use [[Python]] as described here:
+[http://www.swaroopch.com/notes/Vim_en:Scripting#Using_external_programming_languages
+Using external programming languages]
+* :ball put all buffers in windows
+* :tab ball put all buffers in tabs
+* Press [I to display all lines containing the current variable.
+* Press gF to jump to a specified line number in a file.
+
+== Copy and Paste ==
+
+Yes, you should be able to use the "*" or "+" register to
+talk to the system clipboards.  On Win32 they're the same
+thing.  On systems using X, the "*" register is associated
+with the selection buffer (what gets used when you select
+something or use the middle-mouse to paste).  The "+"
+register is the traditional "copy&paste" buffer used by
+control+[x/c/v] in other applications.
+
+As with other registers, they can be the target/source of
+several commands.  Thus, you would specify
+
+  "+3yy
+
+to yank 3 lines to the system clipboard; or use
+
+  "*dap
+
+to delete the "outer paragraph" text object into the system
+selection buffer to be pasted with middle-mouse elsewhere;
+or use
+
+  "+p
+
+to paste the system clipboard and
+
+  "*p
+
+to paste the selection buffer.
+
+You can read generically about registers at
+
+  :help registers
+
+and specifically about the clipboard registers at
+
+  :help quoteplus
+  :help quotestar
+
+== Bookmarks ==
+NAMED MARKS
+*bookmark*
+
+
+
+
+Vim enables you to place your own marks in the text.  The command "ma"
+marks
+
+the place under the cursor as mark a.  You can place 26 marks (a through
+z) in
+
+your text.  You can't see them, it's just a position that Vim remembers.
+
+
+   To go to a mark, use the command `{mark}, where {mark} is the mark
+letter.
+
+Thus to move to the a mark:
+
+
+> >
+
+
+        `a
+
+
+
+
+
+The command 'mark (single quotation mark, or apostrophe) moves you to
+the
+
+beginning of the line containing the mark.  This differs from the `mark
+
+
+command, which moves you to marked column.
+
+
+
+
+
+The marks can be very useful when working on two related parts in a
+file.
+
+Suppose you have some text near the start of the file you need to look
+at,
+
+while working on some text near the end of the file.
+
+
+   Move to the text at the start and place the s (start) mark there: >
+
+
+
+
+
+        ms
+
+
+
+
+
+Then move to the text you want to work on and put the e (end) mark
+there: >
+
+
+
+
+        me
+Then you can use '' to jump back to where you were, or 'e to jump to the
+text
+
+you were working on at the end.
+
+
+   There is nothing special about using s for start and e for end, they
+are
+
+just easy to remember.
+
+
+
+
+
+You can use this command to get a list of marks: >
+
+
+
+
+
+        :marks
+
+
+
+
+
+You will notice a few special marks.  These include:
+
+
+
+
+
+        '       The cursor position before doing a jump
+
+
+        "       The cursor position when last editing the file
+
+
+        [       Start of the last change
+
+
+        ]       End of the last change
+
+
+
+
+
+== Register ==
+ CTRL-R {0-9a-z"%#*+:.-=}					*i_CTRL-R*
+ 		Insert the contents of a register.  Between typing CTRL-R and
+ 		the second character, '"'' will be displayed to indicate that
+ 		you are expected to enter the name of a register.
+ 		The text is inserted as if you typed it, but mappings and
+ 		abbreviations are not used.  If you have options like
+ 		'textwidth', 'formatoptions', or 'autoindent' set, this will
+ 		influence what will be inserted.  This is different from what
+ 		happens with the "p" command and pasting with the mouse.
+ 		Special registers:
+ 			'"''	the unnamed register, containing the text of
+ 				the last delete or yank
+ 			'%'	the current file name
+ 			'#'	the alternate file name
+ 			'*'	the clipboard contents (X11: primary selection)
+ 			'+'	the clipboard contents
+ 			'/'	the last search pattern
+ 			':'	the last command-line
+ 			'.'	the last inserted text
+ 			'-'	the last small (less than a line) delete
+ 			'='	the expression register: you are prompted to
+ 				enter an expression (see |expression|)
+ 				Note that 0x80 (128 decimal) is used for
+ 				special keys.  E.g., you can use this to move
+ 				the cursor up:
+ 					CTRL-R ="\<Up>"
+ 				Use CTRL-R CTRL-R to insert text literally.
+ 				When the result is a |List| the items are used
+ 				as lines.  They can have line breaks inside
+ 				too.
+
+
+
+== Rechtschreibung ==
+Seit Version 7 bietet Vim eine eigene Rechtschreibehilfe an. Nach der
+Eingabe
+ :set spell spelllang=de,en
+werden alle Wörter, die von Vim nicht als korrekte Deutsche oder
+Englische Wörter erkannt werden, rot markiert.
+
+
+== Umlaute ==
+Manchmal hat es auf einer Tastatur keine Umlaute. Kein Problem mit Vim -
+die Umlaute können im Insert-Mode mit CTRL-K als Digraph eingegeben
+werden. Beispiel:
+ CTRL-K U:
+gibt ein Ü ein. Die weiteren Digraphe lassen sich mit
+ :digraph
+anzeigen.
+
+
+== Automatische Komprimierung ==
+Hat eine Datei eine Endung .gz oder .bz2, so wird sie von Vim
+automatisch (de-)komprimiert. Dies funktioniert auch beim Erstellen
+einer neuen Datei, z.B.:
+ $ vim notizen.txt.bz2
+
+
+== Makros ==
+Ein Makro kann dazu verwendet werden, eine oft wiederholte
+Editiersequenz abzukürzen. Die Aufnahme eines Makros hat immer die Form
+qX[Editiersequenz]q. Abgespielt wird es mit @X. Dabei ist X der
+Bezeichner der Sequenz - dies kann ein Buchstabe oder eine Ziffer sein.
+Die Editiersequenz darf auch Wechsel in andere Modi beinhalten, muss
+aber im Normal-Mode starten und enden. Ein Beispiel:
+ qayypVr-q
+Nun wird durch Eingabe von
+ @a
+der Text einer ganzen Zeile unterstrichen.
+
+== Verschlüsselung ==
+Vim bietet die Möglichkeit, einen Teil (Selektion) oder den ganzen
+Inhalt (% Operator) einer Datei durch ein externes Programm zu filtern.
+Möchte ich z.B. eine Textdatei vor dem Speichern mit GPG verschlüsseln
+(wozu GPG natürlich vorher eingerichtet werden muss), so gebe ich einfach
+ :%!gpg -e -a -r andreas
+ein. Damit wird der Text von GPG mit meinem eigenen öffentlichen Key
+verschlüsselt. Da RSA asymmetrisch ist, wird die Passphrase nur zum
+entschlüsseln benötigt, was mit
+ :%!gpg -d -q
+bewerkstelligt wird.
+In beiden Fällen sind Swap- und Viminfo-Dateien aber immer noch
+unverschlüsselt. Sie können entweder mit den Kommandozeilen-Parametern
+-n -i /dev/null oder mit dem Kommando
+ :set noswapfile viminfo=
+deaktiviert werden.
+
+Die Möglichkeit, so einfach externe Programme einsetzen zu können ist
+auch sonst immer wieder äusserst nützlich. Möchte ich beispielsweise
+einige Zeilen alphabetisch sortieren, so markiere ich sie einfach
+(Visual-Mode) und gebe
+ :!sort
+ein.
+
+
+== Mappings ==
+Für oft verwendete Kommandos lohnt es sich, eigene Mappings zu erstellen
+(diese können in der Datei .vimrc gesammelt werden). Ein Beispiel:
+ :map <F2> :execute '!links
+http://dict.leo.org/?search='.expand("<cword>")<CR>
+Nun kann mit F2 auf einen Tastendruck die Übersetzung für das Wort, das
+sich aktuell unter dem Cursor befindet, bei Leo nachgeschlagen werden.
+
+== Literature and tips ==
+ * [http://www.swaroopch.com/notes/Vim Swaroop C H: A Byte of Vim]
+ * [http://www.vim.org/scripts/script.php?script_id=273 taglist.vim : Source code browser]
+ * [http://www.vim.org/scripts/script.php?script_id=90 vcscommand.vim : CVS/SVN/SVK/git integration plugin]
+ * [http://www.vim.org/scripts/script.php?script_id=1520 OmniCppComplete : C/C++ omni-completion with ctags database]
+ * [http://cscope.sourceforge.net/ CSCOPE: a developer's tool for browsing source code]
+ * [http://mysite.verizon.net/astronaut/vim/index.html#GDBMGR Gnu Debugger Manager for Vim]
+

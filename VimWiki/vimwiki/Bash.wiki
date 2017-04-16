@@ -1,0 +1,168 @@
+= bash =
+== generate random numbers ==
+{{{
+# floating point numbers. ATTENTION: numbers are partial very high or
+very low
+head -n 2000 /dev/urandom | od -t fF | awk '{print $2}' | sed -e 's/,/./g'
+# integers
+head -n 2000 /dev/urandom | od -t d2 | awk '{print $2}' | sed -e 's/,/./g'
+# next will take several hours. please create entropy by moving mouse etc.
+nohup /usr/bin/nice -n 19 /usr/bin/head -n 2000 /dev/random |
+/usr/bin/od -t fD | /usr/bin/awk '{print $2}' | /usr/bin/sed -e 's/,/./g' &
+}}}
+
+== Escape-Sequenzen ==
+{{{
+#!/bin/bash
+#
+# This file echoes a bunch of color codes to the
+# terminal to demonstrate what's available. Each
+# line is the color code of one forground color,
+# out of 17 (default + 16 escapes), followed by a
+# test use of that color on all nine background
+# colors (default + 8 escapes).
+#
+
+T='gYw' # The test text
+
+echo -e "\n 40m 41m 42m 43m\
+44m 45m 46m 47m";
+
+for FGs in ' m' ' 1m' ' 30m' '1;30m' ' 31m' '1;31m' ' 32m' \
+'1;32m' ' 33m' '1;33m' ' 34m' '1;34m' ' 35m' '1;35m' \
+' 36m' '1;36m' ' 37m' '1;37m';
+do FG=${FGs// /}
+echo -en " $FGs \033[$FG $T "
+for BG in 40m 41m 42m 43m 44m 45m 46m 47m;
+do echo -en "$EINS \033[$FG\033[$BG $T \033[0m";
+done
+echo;
+done
+echo
+}}}
+
+== changing the colors of your xterm ==
+You can use some or all of the following options in your ''~/.Xdefaults''
+{{{
+XTerm*background:           #103040
+XTerm*foreground:           #add8e6
+XTerm*highlightColor:       #00cdcd
+XTerm*termName:             xterm-color
+XTerm*scrollBar:            false
+XTerm*colorMode:            on
+XTerm*dynamicColors:        on
+XTerm*highlightSelection:   true
+XTerm*saveLines:            1500
+
+XTerm*faceName:             xft: Bitstream Vera Sans Mono:pixelsize=10
+XTerm*eightBitInput:        false
+XTerm*metaSendsEscape:      false
+xterm*loginShell:true
+xterm*transparent:true
+xterm*shading:60
+xterm*font:*-*-fixed-medium-r-normal--*-120-*-*-*-*-iso8859-1
+xterm*boldFont:*-*-fixed-bold-r-normal--*-*-120-*-*-*-*-iso8859-1
+
+XTerm*color0:           #000000
+XTerm*color1:           #ff0000
+XTerm*color2:           #69ad69
+XTerm*color3:           #999700
+XTerm*color4:           #506cc8
+XTerm*color5:           #9a70b2
+XTerm*color6:           #1d999a
+XTerm*color7:           #b0b0b0
+XTerm*color8:           #3c3c3c
+XTerm*color9:           #ff0000
+XTerm*color10:          #69ad69
+XTerm*color11:          #b9ae00
+XTerm*color12:          #7f9af1
+XTerm*color13:          #ad73ba
+XTerm*color14:          #338eaa
+XTerm*color15:          #f4f4f4
+XTerm*colorBD:          #ffffff
+}}}
+Then run:
+{{{xrdb -merge ~/.Xdefaults}}}
+Colornames can be found at: [http://mkaz.com/ref/xterm_colors.html http://mkaz.com/ref/xterm_colors.html]
+
+== Deleting the first line in an *.txt ==
+
+The shown bash script is capable of reading special columns in an *.dat with the "awk" commando. In this example, the first ($1) and third ($3) column of the example.dat are extracted and passed (bye a pipe) to the stream editor "sed".  Sed comes handy for the sometimes useful  deletion of the first line in a  *.txt document. Sed is working with the "ed" commands, which uses the '1d' for '(1)line (d)elete'.  The -e parameter loads a new data and overwrites the old one, in case.
+
+{{{
+cat example.dat | awk {'print $1,$3'} | sed -e '1d' > output.dat
+}}}
+
+== converting a *.ps into *.eps or png ==
+
+{{{
+#!/bin/bash
+#cropp the file with no blanks and save it to *.eps
+echo "cropping ps"
+epscrop Auslagerung.ps > Auslagerung.eps
+
+echo "converting eps to png"
+convert -density 600 Auslagerung.eps rmsd.png
+
+#remove all eps files in this folder.
+rm *.eps
+echo "finished succesfully."
+#---EOF---
+}}}
+
+== sed ==
+ * [http://sed.sourceforge.net/sed1line.txt USEFUL ONE-LINE SCRIPTS FOR SED]
+
+== How to transpose column input into row output ==
+{{{
+# an example for numbers
+$ cat <<EOF > file.txt
+0
+0
+1
+2
+3
+4
+5
+EOF
+$ cat file.txt | octave -q --eval '[val, count] = scanf("%g", Inf);
+printf("%g ",val); printf("\n");'
+0 0 1 2 3 4 5
+}}}
+
+Another version is this
+
+{{{
+sed 's/$/ /' my.file | tr -d '\n'
+}}}
+The sed command adds a blank at every line end. The tr -d command transposes the data form rows into lines.
+
+== some random, unsorted shell hacks ==
+{{{
+# generate file containing numbers 1-20 as single column:
+yes | head -20 | awk '{print NR}' > table.dat
+# or
+seq 1 20 > table.dat
+
+# avoid double printing of motd: comment out line in /etc/csh.login so
+only sshd prints it
+
+# execute commands to be supplemental from stdin
+xargs -i cp ../../orig_dirk.bak/all3/atq/'{}'.atq atq < tmp.dat
+
+# find files, sum their bytes:
+find multigrid/ -name "*_3.con.gz" -exec ls -l {} \; | awk '{print $5}'
+| awk '{s+=$1} END {print s}'
+
+# replace cr/lf -> lf (ToUnix):
+find . -name "*.xyz" -exec sed -i "s/\r//" {} \;
+
+# pipe within find/exec:
+find . -name "*.gout" -exec sh -c "grep -H 'E(' {} | tail -1" \;
+
+# sed typical replacement, multiple strings
+sed 's/1.6612/1.6051/g;s/1.7210/1.7771/g' gaff_orig.dat > gaff_mod04.dat
+
+# rename files recursively (all "here" -> "ecrism")
+find . -name "here.log" -exec rename here ecrism {} \;
+}}}

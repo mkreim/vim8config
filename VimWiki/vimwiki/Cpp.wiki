@@ -1,0 +1,77 @@
+= C++ =
+== pass-by-pointer and pass-by-reference==
+From S. B. Lippmann: C++ Primer, 2nd Ed., Addison-Wesley, 1993, p.126f.
+Two alternatives to pass-by-value are available to the programmer. In one instance, the formal arguments are declared as pointers. `swap()`, for example, could be rewritten as follows:
+{{{
+void swap(int *v1, int *v2) {
+     int tmp = *v2;
+     *v2 = *v1;
+     *v1 = tmp;
+}
+}}}
+`main()` must be modified to declare and call `swap()`. The programmer must now pass the adress of the two objects, not the objects themselvs:
+{{{
+int i=10; int j=20;
+swap(&i, &j);
+}}}
+The second alternative to pass-by-value is to decalre the formal arguments to be type reference. `swap()` could be rewritten as follows:
+{{{
+void swap(int &v1, int &v2) {
+     int tmp = v2;
+     v2 = v1;
+     v1 = tmp;
+}
+}}}
+The call of `swap()` in `main()` looks the same as the original call
+of `swap()`:
+{{{
+int i=10; int j=20;
+swap(i, j);
+}}}
+
+== register Local Variables ==
+From S. B. Lippmann: C++ Primer, 2nd Ed., Addison-Wesley, 1993, p.143.
+Local variables heavily used within a function can be specified with the keyword ''register''. If possible, the compiler will load the variable into a machine register. If it cannot, the variable remains in memory.  Array indices and pointers occuring within a loop are good candidates for register variables.
+{{{
+for (register int ix=0; ix<sz; ++ix) ...
+for (register char *p=str; p; ++p) ...
+}}}
+A formal argument can also be declared as a register variable:
+{{{
+int find( register char *str, char ch ) {
+     while( *str )
+         if ( *str++ == ch ) return 1;
+     return 0;
+}
+}}}
+Register variables may increase the speed of a function if the variable selected are used heavily.
+
+== Measure time periods ==
+{{{
+#include <ctime>
+clock_t start,finish;
+double time;
+
+start = clock();
+sort something
+finish = clock();
+
+time = (double(finish)-double(start))/CLOCKS_PER_SEC;
+}}}
+From: [http://www.juniata.edu/faculty/kruse/cs315/cs315Timing.htm juniata.edu Time Measurement]
+
+== Literature ==
+ *[http://trilinos.sandia.gov/ Trilinos Project - a object-oriented math-libary]
+ *[http://www.linux-magazin.de/news/google_gibt_test_framework_fuer_c_frei Google gibt Test-Framework für C++ frei]
+ *[http://www.henkessoft3000.de/ C++ Tutorial von Leo sein Vadder]
+ *[http://www.cplusplus.com/ www.cplusplus.com - reference, documentation and sourcecodes]
+ *[http://www.cplusplus.com/doc/tutorial/templates.html J. Soulie: Templates, cplusplus.com, 2007]
+ *[http://www.cplusplus.com/doc/tutorial/ J. Soulie: C++ Language Tutorial, cplusplus.com, 2006]
+ *[http://tutorial.schornboeck.net/inhalt.htm T. Schornböck: C++ Tutorial, 2004]
+ *[http://ittk.falb.at/pt/unterlagen/vcppk/inhalt.html V. Henkel: Volkards C++-Kurs, 2001]
+ *[http://www.codeproject.com/KB/cpp/pointers.aspx A. Peace: A Beginner's Guide to Pointers, Cambridge, 2002]
+ *[http://online-media.uni-marburg.de/informatik/cpp/ FB Mathe: C++ Eine Einführung, Universität Marburg, 2003]
+ *[http://wwwcms.fh-pforzheim.de/inhalt/studiengaenge/eiti/daten/labore/i1lt/ckurs.pdf J. Hampel: C++ Kurs, Fachhochschule Pforzheim]
+ *Yang, D. - C++ and Object-oriented Numeric Computating For Scientists And Engineers (Springer, 2000)
+ *[http://www.cs.colostate.edu/~nate/tutorial/tutorial.html a short tutorial on how to move from Matlab to C++]
+ *[http://wiki.linuxeinsteiger.net/index.php/Gdb A short introduction to the GNU debugger gdb]

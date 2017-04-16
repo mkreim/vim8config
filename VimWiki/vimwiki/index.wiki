@@ -1,0 +1,15 @@
+= Programming =
+ * [[Matlab]]
+ * [[Python]]
+ * [[Latex]]
+ * [[General]]
+ * [[Gnuplot]]
+ * [[Cpp]]
+ * [[AWKandSED]]
+ * [[Bash]]
+
+= Software and Tools =
+ * [[git]]
+ * [[Vim]]
+ * ImageMagick
+ * [[FixApplicationBugs]]

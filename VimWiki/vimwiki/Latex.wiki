@@ -1,0 +1,317 @@
+= Latex =
+
+== Strange error using align ==
+{{{
+$ cat test.tex
+    \documentclass{article}
+        \usepackage{amsmath}
+
+    \begin{document}
+        \begin{align}
+            x
+        \end{align}
+    \end{document}
+
+$ diff test.tex test_span.tex
+    3c3
+    < 
+    ---
+    >     \renewcommand{\span}{\mbox{span}}
+
+$ pdflatex test.tex
+    This is pdfTeX, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2010.5.3)  17 FEB 2011 15:26
+    [...]
+    Output written on test.pdf (1 page, 5809 bytes).
+
+$ pdflatex test_span.tex
+    This is pdfTeX, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2010.5.3)  17 FEB 2011 15:26
+    [...]
+    ! Missing # inserted in alignment preamble.
+    <to be read again> 
+                       \crcr 
+    l.14     \end{align}
+}}}
+
+== Updated PGF to PGF2 ==
+* http://gridprogramming.blogspot.com/2009/06/pgftikz-and-opensuse-111.html
+{{{
+    #become root
+    $ cd ~/
+    $ mkdir PGF2Update
+    $ wget "http://downloads.sourceforge.net/project/pgf/pgf/version%202.00/pgf-2.00.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fpgf%2F&ts=1284994032&use_mirror=mesh"
+    $ tar xvzf pgf-2.00.tar.gz
+    $ mkdir BackupFromOldPGF
+    $ cd BackupFromOldPGF/
+    $ mkdir generic latex plain
+    $ cp -a /usr/share/texmf/tex/generic/pgf/ generic/
+    $ cp -a /usr/share/texmf/tex/latex/pgf/ latex/
+    $ cp -a /usr/share/texmf/tex/plain/pgf/ plain/
+    $ cd ..
+    $ rm -rf /usr/share/texmf/tex/generic/pgf /usr/share/texmf/tex/latex/pgf /usr/share/texmf/tex/plain/pgf
+    $ mv pgf-2.00/generic/pgf /usr/share/texmf/tex/generic/
+    $ mv pgf-2.00/latex/pgf/ /usr/share/texmf/tex/latex/
+    $ mv pgf-2.00/plain/pgf /usr/share/texmf/tex/plain/
+    $ texhash
+    # logout and run as normal user:
+    $ texhash
+}}}
+
+== Formular with several possibilities ==
+{{{
+\begin{eqnarray}
+    x = \left\{
+      \begin{array}{ll}
+          1, & \textnormal{if a=b} \\
+          0, & \textnormal{else} \\
+       \end{array}
+    \right.
+\end{eqnarray}
+}}}
+
+== KOMA-Script-Class "scrbook" ==
+{{{
+\documentclass[
+	12pt,             % 10pt, 11pt, 12pt The font size of the document.
+Standard is 10pt
+	a4paper,          % a4paper, a5paper, b5paper, letterpaper, legalpaper
+Defines the paper format. Standard is letterpaper
+                          % landscape Sets landscape format
+	titlepage,        % titlepage, notitlepage Defines whether there is a
+seperate titlepage or not
+                          % leqno Displays the number of formulas on the
+left (instead right)
+			  % fleqn Sets formulas left-aligned (instead of centred)
+                          % openbib Defines the open bibliography-format
+	final,            % draft, ï¬?nal Defines whether this is a
+draft-version or a final version (boxes instead of figs etc.)
+	twoside,          % oneside, twoside Sets document to two-sided or
+one-sided format
+        openany,          % openright, openany Defines whether chapters
+start only on right or on any pages
+	onecolumn,        % onecolumn, twocolumn Sets text in one or two
+columns per page
+	footexclude,      % ?
+	headsepline,      % ?
+	headinclude,      % ?
+	bibtotocnumbered, % ?
+	normalheadings    % ?
+	]{scrbook}
+}}}
+
+== Seitenränder ==
+{{{
+\usepackage[left=2cm,right=2cm,top=3cm,bottom=2.5cm]{geometry}
+}}}
+
+== Deutsche Umlaute, Anführungsstriche u.ä. ==
+{{{
+\usepackage[ngerman]{babel}
+
+\usepackage[latin1]{inputenc}                   % latin1  -- SuSe,
+Debian < Etch
+\usepackage[ansinew]{inputenc}                  % ansinew -- Windows
+\usepackage[utf8]{inputenc}                     % utf8    -- Debian >=
+Etch
+
+\usepackage[babel,german=quotes]{csquotes}      % German   Quotes
+\usepackage[babel,german=swiss]{csquotes}       % Swiss    Quotes
+\usepackage[babel,german=guillemets]{csquotes}  % French   Quotes
+\usepackage[babel,english=american]{csquotes}   % American Quotes
+\usepackage[babel,english=british]{csquotes}    % Britsh   Quotes
+}}}
+
+Um Anführungsstriche in den Text einzufügen schreibt man:
+{{{
+\enquote{text}
+}}}
+
+== Deutsche Bibliographie ==
+Im Header:
+{{{
+\usepackage{bibgerm}                            % für
+\bibliographystyle{gera*}
+}}}
+
+Im Document ganz am Ende:
+{{{
+\bibliography{referenzen}                       % referenzen.bib ist die
+Bibtexdatei mit den Referenzen
+\bibliographystyle{geralpha}
+}}}
+
+== Mathe-Pakete ==
+{{{
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{mathrsfs}
+}}}
+
+== non-italic greek letters ==
+Add this package:
+{{{\usepackage{upgreek}}}}
+Then you can use capital and non-capital greek letters in mathmode that are not italic.<br> for Example:<br>
+{{{$\Updelta \updelta \uppi$}}}
+
+== Kopf- und Fußzeile ==
+{{{
+\usepackage[automark]{scrpage2}
+\pagestyle{scrheadings}
+}}}
+Benutzung der Kopf- und Fußzeilen: xhead[chapter page]{other pages}
+{{{
+\ihead[]{\leftmark}                            % inner Header
+\chead[]{}                                     % center Header
+\ohead[]{\rightmark}                           % outer Header
+\ifoot[]{}                                     % inner Footer
+\cfoot[]{}                                     % center Footer
+\ofoot[\thepage]{\thepage}                     % outer Footer
+\setlength{\headheight}{1.2\baselineskip}      % increase Headheight to
+avoid overfull v-box
+}}}
+
+== Nummerierung in Überschriften und Inhaltsverzeichnis ==
+{{{
+\setcounter{secnumdepth}{2}                    % Nummerierungstiefe in
+Überschriften
+\setcounter{tocdepth}{1}                       % Anzeigetiefe im
+Inhaltsverzeichnis
+}}}
+
+== Schusterjungen und Hurenkinder ==
+{{{
+% This is 'SCHUSTER.STY' as of 25. March 1990
+% http://www.jr-x.de/publikationen/latex/tipps/schusterhuren.html
+% Disable single lines at the start of a paragraph (Schusterjungen)
+\clubpenalty = 10000
+% Disable single lines at the end of a paragraph (Hurenkinder)
+\widowpenalty = 10000 \displaywidowpenalty = 10000
+% - End of 'SCHUSTER.STY' -
+}}}
+
+== Sourcecode-Darstellung ==
+{{{
+\usepackage{verbatim}
+
+\usepackage{listings}
+% \lstset{language=Matlab}
+% \lstset{basicstyle=\small}
+% \lstset{numbers=left,numberstyle=\tiny,stepnumber=1,numbersep=5pt}
+% \lstset{breaklines=true}
+}}}
+
+Benutzung von verbatim:
+{{{
+\begin{verbatim} some code \end{verbatim}
+}}}
+
+Benutzung von listings:
+{{{
+\begin{lstlisting}[numbers=left,name=irgendwas,caption=Überschrift des
+Code-Listings,label=zum_referenzieren]
+code
+\end{lstlisting}
+}}}
+Mögliche Sprachen in listings (language=):
+ABAP Ada ACSL Algol Assembler Basic (Visual) C C++ Caml Cobol Clean Comal 80 csh Delphi  Eiffel Elan erlang Fortran Euphoria GCL Haskell HTML IDL Java ksh Lisp Logo Mathematica make Matlab Mercury MetaPost Miranda Mizar ML Modula-2 MuPAD NASTRAN Oberon-2 OCL Octave Pascal Perl PHP PL/I POV Prolog Python R Reduce Ruby S SAS Scilab SHELXL Simula SQL tcl TeX VBScript Verilog VRML VHDL XML
+
+ *[http://www.pvv.ntnu.no/~berland/latex/docs/listings.pdf The Listings Package (pdf)]
+
+== Graphiken ==
+{{{
+\usepackage{graphics}
+%\usepackage[dvips]{graphicx}
+%\usepackage{epsfig}                           % for eps-figurs ! Must
+be EPS Lv 2 - NO Preview, ASCII encoding
+%\usepackage{subfigure}                        % several pics in one fig
+%\usepackage{wrapfig}                          % floating around figs
+}}}
+
+== Verzeichnisse einfügen ==
+{{{
+\tableofcontents
+\listoffigures
+\listoftables
+}}}
+
+== PDF-Anhänge ==
+{{{
+\documentclass[bibtotocnumbered, headsepline,normalheadings]{scrartcl}
+
+\usepackage[final]{pdfpages}
+
+\begin{document}
+     \includepdf[pages={1-2}]{pdfanhaenge/programm1.pdf}
+     \includepdf[pages={1-3}]{pdfanhaenge/programm1_calvin.pdf}
+     \includepdf[pages={1-10}]{pdfanhaenge/programm2.pdf}
+     \includepdf[pages={1-4}]{pdfanhaenge/programm2_calvin.pdf}
+\end{document}
+}}}
+
+== Acronym: Abkürzungsverzeichnis mit tex automatisieren ==
+{{{
+\documentclass[]{}
+[...]
+\usepackage[printonlyused]{acronym}
+[...]
+\begin{document}
+
+
+\begin{acronym}[YTM]
+     \setlength{\itemsep}{-\parsep}
+     \acro{YTM}{Yield to Maturity, Endfälligkeitsrendite}
+     \acro{betai}[$\beta_i$]{Regressionskoeffizient}
+     \acro{B0}[$B_0$]{Marktsourceis einer Anleihe in $t=0$}
+     \acro{BP}{Basispunkte}
+     \acro{MD}{Molekular Dynamik}
+\end{acronym}
+[...]
+Alle \acs{MD}-Berechnungen \\
+Alle \acf{MD}-Berechnungen \\
+Alle \acl{MD}-Berechnungen \\
+\end{document}
+}}}
+Dabei erhält jede Abkürzung ein Label, z.B. YTM oder betai über das sie im Text referenziert wird.  Bei mathematischen Symbolen wird das Symbol anschließend in eckigen Klammern gesetzt.  Über die Befehle \acs{betai} wird dann nur das Symbol bzw. die Abkürzung im Text gedruckt.  \acf{betai} gibt zusätzlich noch die Erklärung aus, \acl{betai} fügt lediglich die Beschreibung ein.  Die Zeile \setlength{\itemsep}{-\parsep} in der Liste sorgt übrigens dafür, dass zwischen den Einträgen kein Abstand ist und das Verzeichnis kompakt dargestellt wird.<br>
+
+== Links ==
+ * [http://www.matthias-schlecker.de/acronym-abkuerzungsverzeichnis-mit-latex-automatisieren Orginalquelle]
+ * [http://www.ctan.org/tex-archive/macros/latex/contrib/acronym/ acronym.sty]
+ * [http://tug.ctan.org/tex-archive/macros/latex/contrib/bigfoot/ suffix.sty]
+
+== Eigene Formel-Nummerierungen bzw. Namen ==
+
+{{{
+\begin{equation}\tag{Formelnummer}
+  Formel
+\end{equation}
+}}}
+
+== ISO-31-konformer Formelsatz mit Latex ==
+ * [http://www.hallo-ueb.de/formelsatz.pdf ISO-31-konformer Formelsatz mit Latex]
+ * [http://www.emsp.tu-berlin.de/Studentische-Arbeiten/leitfaden/Schreibweise%20EMSP%20051006.pdf Formelsatz, Schriftarten und Schriftschnitte]
+ * [http://userpage.fu-berlin.de/~ram/pub/pub_jf47ht76Ht/schriftsatz Schriftsatz]
+
+== Kursiv Schreiben in Überschriften ==
+In Header:
+{{{
+ \usepackage[T1]{fontenc}
+}}}
+Nun sollte der normale Latex-Befehl \textit{} auch in Überschriften funktionieren.
+
+== latexbeamer, tudbeamer and listings ==
+ * to install tudbeamer (the TUD corporate design latexbeamer class) refere to
+    * [http://exp1.fkp.physik.tu-darmstadt.de/tuddesign/ TUD-Design für LaTeX]
+ * to use source code listings use following code (note the fragile):
+{{{
+\documentclass[18pt,accentcolor=tud1c]{tudbeamer}
+\usepackage{listings}
+\begin{document}
+\begin{frame}[fragile]
+\frametitle{Your title}
+
+\begin{lstlisting}
+code
+\end{lstlisting}
+\end{frame}
+\end{document}
+}}}

@@ -1,0 +1,580 @@
+= Python =
+ * [http://www.python.org/dev/peps/pep-0008/ Style Guide for Python Code]
+ * [http://www.python.org/dev/peps/pep-0257/ Docstring Conventions]
+ * [http://sschwarzer.com/download/robustere_python_programme_clt2010_print.pdf Robustere Python-Programme]
+
+== plotting in ipython ==
+Start ipython with {{{ ipython --pylab }}}
+{{{
+    T = [0, 50, 100, 200, 300, 400]
+    M = [0.83, .92, 1.1, .9, .55, .04]
+    S = [0, 1.99, 2.58, 1.99, 1.13, 0.42]
+    p1 = plot(T,M, label="|mu_ssa - mu_bsde|", marker="s")
+    p2 = plot(T,S, label="|sigma_ssa - sigma_bsde|", marker="o")
+    title('errors in table I')
+    xlabel('time')
+    ylabel('error')
+    legend()
+}}}
+
+== reading a hdf5 file into python ==
+{{{
+import h5py
+import numpy as np
+f = h5py.File('test_file.h5', 'r')
+d = f[f.keys()[0]] # first dataset
+values = d[:]
+values
+Out[15]: 
+array([[ 0.84018772,  0.39438293,  0.78309922,  0.79844003,  0.91164736,
+         0.19755137,  0.33522276,  0.76822959,  0.27777471,  0.55396996],
+       [ 0.47739705,  0.62887092,  0.36478447,  0.51340091,  0.95222973,
+         0.91619507,  0.63571173,  0.71729693,  0.14160256,  0.60696888],
+       [ 0.01630057,  0.24288677,  0.13723158,  0.80417675,  0.15667909,
+       [...]
+f.close()
+}}}
+
+== reading a hdf5 files into numpy ==
+{{{
+
+#
+# This example reads integer data from dset.h5 file into Python floatng buffers.
+#
+import h5py
+import numpy as np
+#
+# Open an existing file using default properties.
+#
+file = h5py.File('dset.h5','r+')
+#
+# Open "dset" dataset under the root group.
+#
+dataset = file['/dset']
+#
+# Initialize buffers,read and print data.
+#
+# Python float type is 64-bit, one needs to use NATIVE_DOUBLE HDF5 type to read data. 
+data_read64 = np.zeros((4,6,), dtype=float)
+dataset.id.read(h5py.h5s.ALL, h5py.h5s.ALL, data_read64, mtype=h5py.h5t.NATIVE_DOUBLE)
+print "Printing data 64-bit floating numbers..."
+print data_read64
+
+data_read32 = np.zeros((4,6,), dtype=np.float32)
+dataset.id.read(h5py.h5s.ALL, h5py.h5s.ALL, data_read32, mtype=h5py.h5t.NATIVE_FLOAT)
+print "Printing data 32-bit floating numbers..."
+print data_read32
+#
+# Close the file before exiting
+#
+file.close()
+
+}}}
+form http://www.hdfgroup.org/ftp/HDF5/examples/Py/h5_readtofloat.py
+
+
+== IndentationError ==
+Could come from a mixture of tabs and spaces in the file in Vim do:
+One easy way is ":set list". It also shows other control characters. 
+Turn it off with ":set nolist".
+
+If that doesn't do it, you can do / C-V C-I (slash control-V control-I) to
+search for a tab character. 
+
+Or :%s/C-V C-I/    /g to remove the tabs
+
+== Use a .py file as config for a programm == 
+ * the program:
+{{{ 
+def readPythonConfig(confile, parameter):
+    config = __import__(confile)
+    for p, w in parameter.iteritems():
+        parameter[p] = getattr(config, p, w)
+    return parameter
+    
+parameter = {'hase': 'leo',    'fisch': 'stefan', 
+             'hund': 'jochen', 'katze': 'unknown'}
+       
+print readPythonConfig('config', parameter) 
+}}}
+ * the config.py:
+{{{
+hase = "Roger Rabbit"
+fisch = "Wanda"
+katze = "garfield"
+}}}
+
+== Notes to pdb (Python Debugger) ==
+ * {{{ import pdb; pdb.set_trace() }}} At this point, you can type r to 'r'eturn from the set_trace() call to the method where you inserted the breakpoint, and you can start stepping through and examining your environment.
+{{{
+try:
+    [YOUR CODE HERE]
+except:
+    import pdb, sys
+    e, m, tb = sys.exc_info()
+    pdb.post_mortem(tb)
+}}}
+ * http://greeennotebook.com/2010/06/using-the-python-debugger-pdb/ Using the Python Debugger pdb]
+ * http://docs.python.org/library/pdb.html pdb - The Python Debugger]
+ * http://pythonconquerstheuniverse.wordpress.com/2009/09/10/debugging-in-python/ Debugging in Python]
+ * http://onlamp.com/pub/a/python/2005/09/01/debugger.html Interactive Debugging in Python]
+ * http://ipython.scipy.org/doc/manual/html/interactive/tutorial.html Quick IPython tutorial]
+
+== Cython and Numpy ==
+ * [http://wiki.cython.org/tutorials/numpy Cython for Numpy users]
+ * [http://docs.cython.org/src/tutorial/numpy.html Using Cython with Numpy]
+ * Install Numpy, numpy-dev, and cython, set paths like this in .bashrc:
+{{{
+    export PYTHONPATH=~/bin/cython/:${PYTHONPATH}
+    export PYTHONPATH=~/bin/cython/Cython-0.13/:${PYTHONPATH}
+    export PYTHONPATH=~/bin/cython/bin/:${PYTHONPATH}
+    export PYTHONPATH=~/bin/cython/lib64/:${PYTHONPATH}
+    export PYTHONPATH=~/bin/cython/lib64/python2.6/site-packages/Cython/Includes/:${PYTHONPATH}
+}}}
+ * compile code with {{{python setup.py build_ext --inplace}}} using:
+{{{
+#!/usr/bin/python
+# =========================================================================
+"""
+*       Filename:  setup.py 
+*    Description:  Compiles the file LUdecomposition.pyx
+*                  build with $ python setup.py build_ext --inplace"""
+# =========================================================================
+from distutils.core import setup
+from distutils.extension import Extension
+from Cython.Distutils import build_ext
+import numpy
+
+ext_modules = [Extension(
+    "LUdecomposition",           # name of extension
+    ["LUdecomposition.pyx"],     # filename of our Pyrex/Cython source
+    include_dirs=[numpy.get_include()]
+    )]
+
+setup(
+  name = 'LUdecomposition',
+  cmdclass = {'build_ext': build_ext},
+  ext_modules = ext_modules
+)
+
+# --- EOF -----------------------------------------------------------------
+}}}
+ * build your code in *.pyx files like this:
+{{{
+import numpy as np
+cimport numpy as np
+def LUdecomposition(np.ndarray[np.float64_t, ndim=2] A not None): 
+    cdef int n,k,j,i
+    if A.shape[0] != A.shape[1]:
+        print 'ERROR in LUdecomposition.m:'
+        print 'Matrix ist nicht quadratisch'
+        return 
+    n = A.shape[0]
+    for k in xrange(0,n-1):
+        if A[k,k] == 0:
+            print 'ERROR in LUdecomposition.m:'
+            print 'Matrix besitzt keine LR-Zerlegung'
+            return
+        for j in xrange(k+1,n):
+            A[j,k] /= A[k,k]
+            for i in xrange(k+1,n):
+                A[j,i] -= A[j,k]*A[k,i]
+    return A
+}}}
+ * call module in normal python code:
+{{{
+    from LUdecomposition import *
+}}}
+
+== Numpy and Scipy ==
+ * [http://www.scipy.org/ Scipy]
+ * [http://numpy.scipy.org/  Numpy]
+ * [http://www.scipy.org/NumPy_for_Matlab_Users Numpy for Matlab Users]
+ * [http://www.scipy.org/Cookbook Scipy Cookbook]
+ * [http://docs.scipy.org/doc/numpy-1.3.x/reference/ Numpy 1.3 Reference]
+ * [http://docs.scipy.org/doc/numpy-1.3.x/user/ Numpy 1.3 User Guide]
+ * [http://docs.scipy.org/doc/scipy-0.7.x/reference/  Scipy v0.7 Reference Guide]
+ * [http://matplotlib.sourceforge.net/users/pyplot_tutorial.html Pyplot tutorial]
+
+== for loops ==
+{{{
+    imax = 100
+    for i in xrange(imax):
+        ...
+
+    from itertools import repeat
+    for i in repeat(None, imax):
+        ...
+}}}
+
+== Code Snippets ==
+=== Shebang ===
+{{{
+#!/usr/bin/python
+}}}
+
+=== text output and variables===
+{{{
+print "Hello World"
+i=5
+print i
+}}}
+
+=== for loop ===
+{{{
+for i in range(1,10):
+		print i
+}}}
+
+=== while loop ===
+{{{
+while i<10:
+		print i
+		i=i+1
+}}}
+
+=== if conditions ===
+{{{
+if i==3:
+	print "three"
+elif i==5:
+	print "five"
+else:
+	print "Something else"
+}}}
+
+=== vectors ===
+{{{
+v=(1,'bla',2,"x")
+for i in range(0,4):
+		print v[i]
+}}}
+
+=== external programs ===
+{{{
+import os
+os.system("ls")
+os.mkdir("Apfelstrudel")
+os.chdir("/usr/people/.../")
+}}}
+for details see: [http://docs.python.org/library/os.html#os.system os.system on Python Docs]
+
+=== external programs ===
+{{{
+for i in (11):
+    print "%03d" % i
+}}}
+
+The "%03d" tells python to complete every item in "i" to at least an 3 character number. In this example the numbers from 1 - 10 will be completed in this way : 001, 002, 003, ..., 009, 010 . The interesting part is the last number
+which normally makes trouble.
+
+=== run a script in different directories of type 001 002 003 ... ===
+{{{
+import os
+for i in range(11):
+    print "%03d" % i
+    os.chdir("%03d" % i)
+    os.system("pwd")
+    cmd = "./MyLittlePony.sh &> ./MyLittleLogfile.log"
+    os.system(cmd)
+}}}
+
+=== Automatic Doc String Testing ===
+See also: [http://docs.python.org/library/doctest.html doctest --- Test interactive Python examples]
+{{{
+def _test():
+    import doctest, test
+    return doctest.testmod(test)
+
+def hallo(a,b):
+    """
+    usage:
+    >>> import test
+    >>> print test.hallo(1,2)
+    3
+    """
+    return a+b
+
+if __name__ == '__main__':
+    _test()
+}}}
+{{{
+$ python test.py -v
+Trying:
+    import test
+Expecting nothing
+ok
+Trying:
+    print test.hallo(1,2)
+Expecting:
+    3
+ok
+2 items had no tests:
+    test
+    test._test
+1 items passed all tests:
+   2 tests in test.hallo
+2 tests in 3 items.
+2 passed and 0 failed.
+Test passed.
+}}}
+
+=== Vim scripts with Python ===
+{{{
+" From: www.swaroopch.com/
+" Make sure we run only once
+if exists("loaded_related")
+    finish
+endif
+let loaded_related = 1
+
+function Related()
+python <<EOF
+
+import vim
+
+print 'Length of the current line is', len(vim.current.line)
+
+EOF
+endfunction
+}}}
+
+== Vim and Python ==
+Place the following in your .bashrc
+{{{
+export $EDITOR="/usr/bin/gvim -p"
+alias vim=$EDITOR
+alias vi=$EDITOR
+alias gvim=$EDITOR
+alias e=$EDITOR
+alias kate=$EDITOR
+alias nedit=$EDITOR
+alias nano=$EDITOR
+}}}
+Place the following in your .vimrc
+{{{
+" Automatically indent when adding a curly bracket, etc.
+set smartindent
+
+" Tabs should be converted to a group of 4 spaces. (official Python
+convention)
+set shiftwidth=4
+set tabstop=4
+set expandtab
+set smarttab
+autocmd FileType python runtime! autoload/pythoncomplete.vim
+}}}
+
+== VMD and Python ==
+Start the python mode in VMD with:
+ vmd -dispdev text -python -e Your_VMD_Python_Script.vmdpy
+Display the atomsel help by:
+{{{
+from atomsel import *
+help(atomsel)
+}}}
+This leads to the following output:
+{{{
+Help on class atomsel in module atomsel:
+
+class atomsel(__builtin__.object)
+ |  atomsel( selection, molid = top, frame = now) -> new selection object
+ |
+ |  Methods defined here:
+ |
+ |  __getattribute__(...)
+ |      x.__getattribute__('name') <==> x.name
+ |
+ |  __getitem__(...)
+ |      x.__getitem__(y) <==> x[y]
+ |
+ |  __len__(...)
+ |      x.__len__() <==> len(x)
+ |
+ |  __repr__(...)
+ |      x.__repr__() <==> repr(x)
+ |
+ |  __str__(...)
+ |      x.__str__() <==> str(x)
+ |
+ |  center(...)
+ |      center(weight=None) -> (x, y, z)
+ |      Return a tuple corresponding to the center of the selection,
+ |      optionally weighted by weight.
+ |
+ |  contacts(...)
+ |      contacts(sel, cutoff) -> contact pairs
+ |      Return two lists, whose corresponding elements contain atom indices
+ |      in selection that are within cutoff of sel, but not directly bonded.
+ |
+ |  fit(...)
+ |      fit(sel, weight=None) -> transformation matrix
+ |      Compute and return the transformation matrix for the RMS alignment
+ |      of the selection to sel.  The format of the matrix is a 16-element
+ |      tuple suitable for passing to the move() method.
+ |      Weight must be None or list of same size as selections.
+ |
+ |  get(...)
+ |      get( attrib ) -> corresponding attrib values for selected atoms.
+ |
+ |  minmax(...)
+ |      minmax() -> (min, max)
+ |      Return minimum and maximum coordinates for selected atoms.
+ |
+ |  move(...)
+ |      move( matrix ) -> apply coordinate transformation to selection.
+ |      matrix should be of the form returned by fit().
+ |
+ |  moveby(...)
+ |      moveby( vec ) -> shift the selection by the three-element vector vec.
+ |
+ |  rmsd(...)
+ |      rmsd(sel, weight=None) -> rms distance between selections.
+ |      Selections must have the same number of atoms.
+ |      Weight must be None or list of same size as selections.
+ |
+ |  sasa(...)
+ |      sasa(srad, sel, ... ) -> solvent accessible surface area.
+ |      srad gives solvent radius.
+ |      Optional keyword arguments:
+ |        samples=500 -- specifies number of sample points used per atom.
+ |        points=None -- If points is a list, coordinates of surface points
+ |          will be appended to the list.
+ |        restrict=None -- Pass an atom selection as argument to restrict
+ |          to find contributions coming from just atoms in restrict.
+ |
+ |  set(...)
+ |      set( attrib, val ) -> set attrib values for selected atoms.
+ |      val must be either a single value, or a sequence of values, one for
+ |       each atom in selection.
+ |
+ |  update(...)
+ |      update() -> Recompute atoms in selection; if the selection is
+ |      distance-based (e.g., if it uses 'within'), changes to the frame
+ |      will not be reflected in the selected atoms until this method
+ |      is called.
+ |
+ |  ----------------------------------------------------------------------
+ |  Data and non-method functions defined here:
+ |
+ |  __doc__ = 'atomsel( selection, molid = top, frame = now) -> new select...
+ |
+ |  __new__ = <built-in method __new__ of type object>
+ |      T.__new__(S, ...) -> a new object with type S, a subtype of T
+ |
+ |  bonds = <attribute 'bonds' of 'atomsel.atomsel' objects>
+ |
+ |  frame = <attribute 'frame' of 'atomsel.atomsel' objects>
+ |
+ |  molid = <attribute 'molid' of 'atomsel.atomsel' objects>
+ |
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from __builtin__.object:
+ |
+ |  __delattr__(...)
+ |      x.__delattr__('name') <==> del x.name
+ |
+ |  __hash__(...)
+ |      x.__hash__() <==> hash(x)
+ |
+ |  __init__(...)
+ |      x.__init__(...) initializes x; see x.__class__.__doc__ for signature
+ |
+ |  __reduce__(...)
+ |      helper for pickle
+ |
+ |  __setattr__(...)
+ |      x.__setattr__('name', value) <==> x.name = value
+ |
+ |  ----------------------------------------------------------------------
+ |  Data and non-method functions inherited from __builtin__.object:
+ |
+ |  __class__ = <type 'type'>
+}}}
+ * [http://www.ks.uiuc.edu/Research/vmd/current/ug/node145.html Python Text Interface]
+ * [http://www.ks.uiuc.edu/Research/vmd/current/ug/node149.html The built-in atomsel type]
+
+=== Loop trough a trajectory ===
+The following script reads in a psf and several dcd-files one after the other and writes the ''x y z'' coordinates of all atoms in all frames to files called ''dummy-fi[frame-number].dat''. 
+{{{
+from molecule import *
+from atomsel  import *
+import sys
+
+##############################################################################
+
+##############################################################################
+
+psffile  = '../sim_template/data/004_md_start.psf'
+dcds     = '../sim_template/results/trajectories/004_md.'
+firstdcd = 1
+lastdcd  = 29
+yoursel  = 'all' # you can use all atomselection commands known from vmd
+##############################################################################
+
+
+for dcdi in range(firstdcd,lastdcd+1):
+    mid=load('psf',psffile)
+    dcdfile=dcds+str(dcdi)+'.dcd'
+    read(mid, 'dcd', dcdfile, 0, -1, 1, -1)
+    N=numframes(mid)
+
+    for fi in range(0,N):
+        sel=atomsel(yoursel,frame=fi)
+
+        x=sel.get('x')
+        y=sel.get('y')
+        z=sel.get('z')
+
+        fout=open('dummy-fi'+repr(fi)+'.dat','w')
+        for j in range(0,len(x)):
+            fout.write(repr(x[j])+' '+repr(y[j])+' '+repr(z[j])+'\n')
+        fout.close()
+    delete(mid)
+sys.exit()
+}}}
+
+=== pass command line arguments from vmd to python ===
+Execute the following script with:
+ vmd -dispdev text -python -e sel2pdb.vmdpy -args -one -two -three four
+{{{
+from molecule import *
+from atomsel  import *
+import sys
+
+for arg in sys.argv:
+    print arg
+
+sys.exit()
+}}}
+
+== Literature and Websites ==
+ * [http://www.python.org/ www.python.org]
+ * [http://docs.python.org/tut/tut.html Guido van Rossum: Python Tutorial]
+ * [http://www.swaroopch.com/notes/Python Swaroop C H: A Byte of Python]
+ * [http://docs.python.org/reference/ The Python Language Reference Release: 2.6]
+ * [http://docs.python.org/library/ The Python Standard Library Release: 2.6]
+ * [http://docs.python.org/search.html Search Python v2.6.1 documentation]
+ * [http://wiki.python.org/moin/NumericAndScientific Numeric and Scientific with Python]
+ * [http://matplotlib.sourceforge.net/index.html matplotlib is a python 2D plotting library]
+ * [http://www.dalkescientific.com/writings/diary/archive/2005/04/22/matplotlib.html matplotlib]
+ * [http://www.dalkescientific.com/writings/diary/archive/2005/04/23/matplotlib_without_gui.html matplotlib without a GUI]
+ * [http://www.dalkescientific.com/writings/diary/archive/2005/04/24/interactive_html.html Interactive HTML]
+ * [http://www.dalkescientific.com/writings/diary/archive/2005/04/24/html_templates.html HTML Templates]
+ * [http://www.dalkescientific.com/writings/diary/archive/2005/04/26/extending_python.html Extending Python]
+ * [http://wiki.python.de/ pythonwiki]
+ * [http://www.diveintopython.org/ Dive Into Python]
+ * [http://rpy.sourceforge.net/ A simple and efficient access to R from Python]
+ * [http://www.faqs.org/docs/diveintopython/kgp_commandline.html Handling command line arguments]
+ * [http://www.scienceblogs.de/diaxs-rake/2009/03/wissenschaftlichess-arbeiten-mit-python-und-scipy-i-einfuhrung.php Wissenschaftliches Arbeiten mit Python und SciPy I: Einführung]
+ * [http://www.scienceblogs.de/diaxs-rake/2009/04/wissenschaftliches-arbeiten-mit-python-und-pylab-ii-bunte-bildchen-mit-matplotlib.php Wissenschaftliches Arbeiten mit Python und PyLab II: Bunte Bildchen mit matplotlib]
+ * [http://www.amazon.com/exec/obidos/ISBN=3540435085 Amazon: Python Scripting for Computational Science by Hans Petter Langtangen]
+ * [http://wiki.python.org/moin/Languages/German?highlight=%28CategoryLanguage%29 List of German Python Documents]
+ * [http://www.amazon.com/exec/obidos/ISBN=1590280539 Amazon: Problem Solving With Algorithms And Data Structures Using Python by Bradley N.  Miller]
+ * [http://wiki.python.de/ pythonwiki (german)]
+ * [http://starship.python.net/mailman/listinfo/python-de python-de -- Die Deutsche Python Mailingliste]
+ * [http://www.python-forum.de/ Das deutsche Python-Forum]
+ * [http://www.python.org/doc/ Python Documentation]
+ * [http://pica1l.lhb.tu-darmstadt.de/CHARSET=ISO-8859-1/DB=LHBDA/FKT=6015/FRM=all%253Apython%2Bper%253A%2Btit%253A%2Bkor%253A%2Bsw%253A%2Bvrl%253A%2Bnum%253A%2Bjhr%253A/IMPLAND=Y/LNG=DU/LRSET=1/SET=1/SID=52e8b744-1/SRT=YOP/TTL=1/SHW?FRST=3 ULB: Das Python-Praxisbuch by Farid Hajji]
+ * [http://pica1l.lhb.tu-darmstadt.de/CHARSET=ISO-8859-1/DB=LHBDA/FKT=6015/FRM=all%253Apython%2Bper%253A%2Btit%253A%2Bkor%253A%2Bsw%253A%2Bvrl%253A%2Bnum%253A%2Bjhr%253A/IMPLAND=Y/LNG=DU/LRSET=1/SET=1/SID=52e8b744-1/SRT=YOP/TTL=1/SHW?FRST=7 ULB: Python scripting for computational science by Hans Petter Langtangen]
+ * [http://heim.ifi.uio.no/~hpl/scripting/all-nosplit/index.html Slides collection: Scripting for Computational Science]

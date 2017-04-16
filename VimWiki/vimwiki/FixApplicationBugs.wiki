@@ -1,0 +1,52 @@
+== Xfce loses toolbars on windows, and other stuff ==
+
+Press Alt + F2, and restart the file manager, xfwm4
+
+== Resize application windows without anoying bug in XFCE ==
+
+Best Method: Alt + right-click + drag
+
+This is maybe the easiest and most useful way of resizing windows. Simply beautiful: holding Alt and left-click drag!
+
+== How to solve "Your profile could not be opened correctly" issue in Chrome ==
+
+If Chrome has not been shut down correctly, it displays the message "Your profile could not be opened correctly" at startup and
+some features are unavailable. The following procedure fixes the issue, by removing the locks on the sqlite3 files
+
+ cd .config/google-chrome
+ mv Default Default.bak
+ cp -r Default.bak Default.
+
+== Firefox and Thunderbird refuse to start after PC crash ==
+
+Delete the ''lock''  and ''.parentlock'' files in ''.thunderbird'' and ''.mozilla/firefox'' directories
+
+== Manually install 64-bit Flash player in Chrome ==
+
+Get the beta version of the Flash Player from Adobe site. Create a directory /opt/google/chrome/plugins and place the file there.
+Start Chrome with
+
+/opt/google/chrome/google-chrome --enabled-plugins %U
+
+and go to about:plugins, the new version should show up.
+
+== Use sshfs ==
+
+Install sshfs from the appropriate software repositories.
+
+Make a directory remoteVolume/ in $HOME and assign appropriate rights
+
+Connect to the remote machine with
+
+sshfs xxx@rzlx1.rz.uni-karlsruhe.de:/absolute/remote/path/ ~/remoteVolume/
+
+to dismount volume use
+
+fusermount -u /$HOME/remoteVolume/
+
+== Thunderbird launches twice ==
+
+After clicking on the Thunderbird icon, the applications tries to launch twice and hangs for a couple of seconds. This is a known Mozilla bug and can be solved by 
+disabling the Launch feedback checkbox in the Launcher properties.
+Disable Launch feedback
+

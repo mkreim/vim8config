@@ -1,0 +1,306 @@
+= Gnuplot =
+== Example ==
+{{{
+ #!/usr/local/linux/bin/gnuplot
+ 
+ set border 31 lt -1 lw 1.00
+ set dummy x,y
+ set formt x "%g"
+ set format y "%g"
+ set format x2 "%g"
+ set format y2 "%g"
+ set format z "%g"
+ set format cb "%g"
+ 
+ set lmargin -1
+ set bmargin -1
+ set rmargin -1
+ set tmargin -1
+ set encoding iso_8859_1
+ 
+ #set size ratio 0.6 0.651,1.085
+ #set size ratio 0.6 0.6,1.
+ set size ratio 0.5
+ set terminal postscript eps color enhanced "Helvetica" 16
+ set output "rmsd_all_skip10_ns.ps"
+ 
+ #set key 29,-7
+ set xlabel "{/Helvetica-Oblique t} / {ns}"
+ set ylabel "{/Helvetica-Oblique RMSD} / {\305}"
+ #set ylabel "{/Helvetica-Oblique g}@^{/Helvetica-Oblique uv}_{/Helvetica
+ KCl} (Cl^{-}- K^{+})"
+ set nokey
+ 
+ #set logscale y
+ 
+ #set format y "%.1f"
+ #set format y  "%4.f"
+ #set format y2 "%+g"
+ 
+ set xtics 0,5,1000
+ set ytics  nomirror -10,0.5,10
+ ##set y2tics nomirror -1000,1,50000
+ set xrange [0:75]
+ set yrange [0:3.5]
+ #set y2range [-2:5.5]
+ 
+ plot 	"rmsd_all_ns.data" w l lt 1 lw 1 lc rgbcolor "black", \
+  		"rmsd_330-switch-300_ns.data" w l lt 1 lw 1 lc rgbcolor "black", \
+  		"rmsd_330_startsim_ns.data" w l lt 1 lw 1 lc rgbcolor "black"
+ 
+ # --- EOF ---
+}}}
+* [http://www.uni-hamburg.de/Wiss/FB/15/Sustainability/schneider/gnuplot/colors.htm Color Names and Their Numerical Equivalent]
+
+== How to get plotsize and labels right ==
+ * Don't use numbers at the edges, NEVER!
+ * Use not displayed ciffers to adjust the spacing between y-axis label and numbering, e.g.: 
+ set format x "%.1f "
+ * use the epsmerge script from [http://home.clara.net/nox/software/epsmerge/]: 
+ ./epsmerge -par -y 2 -x 1 --stack -cs 12 input_file_1.eps input_file_2.eps > output_file_1.eps
+
+== skipping several points ? ==
+ plot   "Auslagerung.dat" every 1000 w l lt 1 lw 1 lc rgbcolor "red"
+This plots only 'every nth' point !
+
+== Calculations in Gnuplot ? ==
+ plot "Auslagerung.dat" using {$1*2e-6}:{$2} every 1000 w l lt 1 lw 1 lc rgbcolor "red"
+The using command tells Gnuplot which columns he should use, e.g. 1:2.  With the dollar-sign you can specify and calculate with the columns.
+
+== Changing the axis-formation ==
+ set format x  "%.0f"
+ set format y  "%g"
+You can use every modification on the format command, that you know from printf, like %f (float) or %i (integer).
+
+== multiple plots ==
+{{{
+# Gnuplot recommends setting the size and origin before going to
+# multiplot mode
+# This sets up bounding boxes and may be required on some terminals
+set size 1,1
+set origin 0,0
+
+# Done interactively, this takes gnuplot into multiplot mode
+# and brings up a new prompt ("multiplot >" instead of "gnuplot >")
+set multiplot
+
+# plot the first graph so that it takes a quarter of the screen
+set size 0.5,0.5
+set origin 0,0.5
+set ytics  nomirror -68000,4000,54000
+set yrange [-68000:-54000]
+set ylabel "{/Helvetica-Oblique Energie} / {kcal/mol}"
+plot    "ionbeam_TOTAL.data"                            w l lt 1 lw 1 lc rgbcolor "black"
+
+# plot the second graph so that it takes a quarter of the screen
+set size 0.5,0.5
+set origin 0,0
+set ytics  nomirror 7000,2000,14000
+set yrange [7000:14000]
+set ylabel "{/Helvetica-Oblique kin. Energie} / {kcal/mol}"
+plot    "ionbeam_KINETIC.data"                          w l lt 1 lw 1 lc rgbcolor "black"
+
+# plot the third graph so that it takes a quarter of the screen
+set size 0.5,0.5
+set origin 0.5,0.5
+set ytics  nomirror -1000,2000,8000
+set yrange [-1000:8000]
+set ylabel "{/Helvetica-Oblique Druck} / {bar}"
+plot    "ionbeam_PRESSURE.data"                                 w l lt 1 lw 1 lc rgbcolor "black"
+
+# plot the fourth graph so that it takes a quarter of the screen
+set size 0.5,0.5
+set origin 0.5,0
+set ytics  nomirror 180,50,340
+set yrange [180:340]
+set ylabel "{/Helvetica-Oblique Temperatur} / {K}"
+plot    "ionbeam_TEMP.data"                             w l lt 1 lw 1 lc rgbcolor "black"
+
+# On some terminals, nothing gets plotted until this command is issued
+unset multiplot
+
+# remove all customization
+reset
+}}}
+
+==histogramm==
+{{{
+#!/usr/local/linux/bin/gnuplot
+
+set border 31 lt -1 lw 1.00
+set dummy x,y
+set format x "%g"
+set format y "%g"
+
+set lmargin -1
+set bmargin -1
+set rmargin -1
+set tmargin -1
+set encoding iso_8859_1
+
+set size ratio 0.5
+set terminal postscript eps color enhanced "Helvetica" 20
+set output "CPU64.eps"
+
+set xlabel "{/Helvetica-Oblique Anzahl der verwendeten Gitter}"
+set ylabel "{/Helvetica-Oblique Reale Rechenzeit} / {s}"
+
+set xrange [0.7:2.3]
+
+set style data histogram
+set style histogram cluster gap 1
+set style fill solid border -1
+
+#set width of the boxes
+set boxwidth 0.125
+
+set xtics ("1" 1, "2" 2)
+
+# keywords for histogramm plots: with boxes
+plot    "./CPU64.data" using ($1-0.125):2 with boxes lw 1 title "Picard", \
+        "./CPU64.data" using 1:3 with boxes lw 1 title "DIIS", \
+        "./CPU64.data" using ($1+0.125):4 with boxes lw 1 title
+"Newton-GMRES"
+}}}
+
+Alternativ example:
+{{{
+#!/usr/local/linux/bin/gnuplot
+
+set border 31 lt -1 lw 1.00
+set dummy x,y
+set format x "%g"
+set format y "%g"
+
+set lmargin -1
+set bmargin -1
+set rmargin -1
+set tmargin -1
+set encoding iso_8859_1
+
+set size ratio 0.5
+set terminal postscript eps color enhanced "Helvetica" 14
+set output "Auslagerung.ps"
+
+set xlabel "{/Helvetica-Oblique C-alpha Aminosäure}" offset 0,-2
+set ylabel "{/Helvetica-Oblique Relativer Aufenthalt in der Membran} / {%}"
+set nokey
+#set xrange [1:37.0]
+
+set style data histogram
+set style histogram cluster gap 1
+set style fill solid border -1
+
+#set width of the boxes
+set boxwidth 0.3
+
+set xtics border in scale 0.5,0.5 nomirror rotate by -50  offset
+character 0, 0, 0
+set xtics ("VAL" 1, "MET" 2, "PRO" 3 ,"LYS" 4, "GLN" 5, "ILE" 6, "VAL"
+7, "TYR" 8, "TRP" 9, "LYS" 10, "GLN" 11, "TRP" 12, \
+"LEU" 13, "SER" 14, "LEU" 15, "ARG" 16, "ASN" 17, "PRO" 18, "ILE" 19,
+"LEU" 20, "VAL" 21, "PHE" 22, "LEU" 23, "LYS" 24, \
+"THR" 25, "ARG" 26, "VAL" 27, "LEU" 28, "LYS" 29, "ARG" 30, "TRP" 31,
+"ARG" 32, "LEU" 33, "PHE" 34, "SER" 35, "LYS" 36 )
+
+# keywords for histogramm plots: with boxes
+plot "out.dat" using 1:2 with boxes lw 1
+}}}
+
+== 3d plotting ==
+The 3d plot function of Gnuplot can work with binary files as well as
+with an matrix structure too.
+Your dataset could look like this one :
+
+'''Data format:'''
+{{{
+0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+0 0 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0
+0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+0 0 0 0 1 1 1 1 1 1 1 1 1 0 0 0 0
+0 0 0 0 1 1 1 1 1 1 1 1 0 0 0 0 0
+0 0 1 1 1 1 1 1 1 1 1 1 1 0 0 0 1
+0 0 1 1 1 1 1 1 1 1 1 1 1 0 0 0 1
+0 0 1 1 1 1 1 1 1 1 1 1 1 0 0 0 1
+0 0 1 1 1 1 1 1 1 1 1 1 1 0 0 0 1
+0 0 1 1 1 1 1 1 1 1 1 1 1 0 0 0 1
+0 0 1 1 1 1 1 1 1 1 1 1 1 0 0 0 1
+0 0 0 1 1 1 1 1 1 1 1 1 1 0 0 0 1
+0 0 1 1 1 1 1 1 1 1 1 1 1 0 0 0 1
+0 0 1 1 1 1 1 1 1 1 1 1 1 0 0 0 1
+0 0 0 0 1 1 1 1 1 1 1 1 1 0 0 0 1
+0 0 1 1 1 1 1 1 1 1 1 1 1 0 0 0 1
+0 0 0 1 1 1 1 1 1 1 1 1 1 0 0 0 1
+0 0 1 1 1 1 1 1 1 1 1 1 1 0 0 0 1
+}}}
+
+
+With this code, you could gain an 3d map plot, based on the pm3d technic
+used by Gnuplot.
+
+'''Code:'''
+{{{
+#!/usr/local/linux/bin/gnuplot
+
+set border 31 lt -1 lw 1.00
+set dummy x,y
+set format x "%g"
+set format y "%g"
+set format z "%g"
+
+set lmargin -1
+set bmargin -1
+set rmargin -1
+set tmargin -1
+set encoding iso_8859_1
+
+set size ratio 1
+set terminal postscript eps color enhanced "Helvetica" 16
+set output "test3D.ps"
+
+set xlabel "{/Helvetica-Oblique Residum}"
+set ylabel "{/Helvetica-Oblique Timestep} / {??}"
+set zlabel "{/Helvetica-Oblique Helicity}"
+set nokey
+
+set xrange [0:40]
+set ticslevel 0
+
+set pm3d map
+unset colorbox
+
+set palette defined (0 "white", 0.9999 "white", 1 "black")
+
+set grid front lt 1 lw 0.5 lc rgbcolor "#00BFFF"
+set grid noytics
+set xtics rotate by -90 scale 0.0,0.0 nomirror offset character 0.5, 0, 0
+set xtics ("VAL" 1.5, "MET" 2.5, "PRO" 3.5 ,"LYS" 4.5)
+
+splot "output2.dat" matrix using ($1+1):($2*50):($3)
+
+# --- EOF ---
+}}}
+
+Some explanations:
+The pm3d type interpolates your dataset trough color gradients.
+So you need to define a palette ("set palette defined") with specific
+colors at key points on your z axes.
+Gnuplot fills the resulting gaps with gradients between these colors.
+If you want to suppress the color legend, you need the line "unset
+colorbox". "set grid" includes a grid, based on your xtics.
+To move the origin off the z axes at (0,0) you need the "ticslevel 0"
+command.
+To show a grid you can use the "set grid" command with keywords like
+"front/back",lw,lt,no{xtics/ytics/x2tics/y2tics} and many more.
+For the full list of commands, that could be used with grid, just have a
+look into the Documantation (Gnuplot 4.3,p.106).
+To modify the labels at the "xtics", you can use "rotate by" for a
+rotation, or "offset charater 0,0,0" (x/y/z) to move your labels.
+With "set xtics scale" you can define the width and length of your
+xtics. The "set xtics nomirror" command suppresses these setings for
+the x2 axes (top).
+
+'''Links:'''
+ * [http://t16web.lanl.gov/Kawano/gnuplot/plot3d-e.html Gnuplot -- not so Frequently Asked Questions: About 3-Dimensional Plot]
+ * [http://www.gnuplot.info/docs/node167.html#set_colorbox Gnuplot Manual: colorbox]
+ * [http://blog.damiles.com/?p=36 GNUPLOT - 3d plot surface]

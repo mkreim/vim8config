@@ -1,0 +1,153 @@
+= AWK =
+
+==Write a parser==
+
+Read out defined data with the BASH-function (grep) and put them into an
+output file that can be used by gnuplot:
+
+{{{
+#!/bin/bash
+
+#Grep: searching data for an string, e.g. "Energy". Circumflex in front
+of the string modifies the search to be restricted on those lines that
+"start" with #the string as the first word.
+
+grep "^ENERGY:"
+/usr/people/prakt/leo_prakt_ss08/leo001/simulation_pb1_f2/plot/logfile.log
+\
+
+#For every hit, awk shell take the second and twelve string in the line.
+In an NAMD-file this would be TS (time steps) and TOTAL.
+| awk {'print $2,$12'} \
+> >
+/usr/people/prakt/leo_prakt_ss08/leo001/simulation_pb1_f2/plot/output_log.dat
+
+
+exit
+}}}
+
+==Delete the first row of a file and parse the rest==
+
+Sometimes you get an output with a title for each column which is
+irritating gnuplot.
+For a proper solution, you can use a combination of cat, awk and sed
+commands with useful parameters.
+In this case the sed -e '1d' is the deletion command: 1d deletes the
+first row of a fresh loaded file  (-e).
+This script leaves the old data untouched and writes out a new file
+without the headlines in it.
+{{{
+#!/bin/bash
+cat rmsd_out.dat | awk {'print $1,$2'} | sed -e '1d' > Auslagerung.dat
+exit
+}}}
+
+==AWK: searching for columns with an specific tag==
+
+If you are interested in only those entries including a simple tag, like
+words or numbers, you can specify your awk command like in this e.g.:
+ awk '/Apfelstrudel/ {print $1,$2}' your.file
+This command would extrude every line with the keyword: "Apfelstrudel"
+and prints out the first and second column.
+
+It is even possible to search for a specific tag in only one column
+(instead of a line).
+This command searches the first column for the keyword Apfel, no matter
+where it comes up. So this script would even accept entries like
+"superApfel".
+ awk '$1~/Apfel' your.file
+You can search EXCEPT for all entries in a specific columns with the
+keyword in it. The difference is the exclamation mark "!" .
+The output for an positive hit is always the whole line (see e.g.
+downwards)
+ awk '$1!~/Apfel' your.file
+
+If you want to specify your keyword or search pattern even more you can
+use the full set of meta signs
+ * ^          = first entry in a line
+ * $          = last entry in a line
+ * [...]      = one of the signs in brackets could be at this position
+ * [...-...]  = one of the list elements in brackets could be at this position
+ * [^...]     = all signs except of those in brackets can be at this position
+ * [^...-...] = all list elements except of those in brackets can be at this position
+ * ^text$     = line with exactly this entry
+ * \>         = word end
+ * \<         = word begin
+
+Some examples:
+test-file:
+
+{{{
+1 Apfel
+2 apfel
+3 superApfel
+4 super
+5 Apf1l
+6 aPfElsTrUdEl
+}}}
+
+Now some exampels for scripts with meta signs
+ awk '$1!~/Apfel/' test.file
+Output: The whole list
+
+ awk '$2~/\<Apfel/' test.file
+Output: 1 Apfel
+
+ awk '$2~/[aA]pfel/' test.file
+Output:<br>
+1 Apfel<br>
+2 apfel<br>
+3 superApfel<br>
+
+ awk '$2~/[^u-z]Apfel/' test.file
+Output: 3 superApfel
+
+ awk '$2~/Apfel$/' test.file
+Output:<br>
+1 Apfel<br>
+3 superApfel<br>
+
+ awk '$2~/^aPfElsTrUdEl$/' test.file
+Output: 6 aPfElsTrUdEl
+
+ awk '$2~/\<a/' test.file
+Output: <br>
+2 apfel <br>
+6 aPfElsTrUdEl <br>
+
+ awk '$2~/^super/' test.file
+Output: <br>
+3 superApfel <br>
+4 super <br>
+
+ awk '$2~/Apf.l/' test.file
+Output: <br>
+1 Apfel <br>
+3 superApfel <br>
+5 Apf1l <br>
+
+ awk '$2~/^[^aA]/' test.file
+Output:<br>
+3 superApfel<br>
+4 super<br>
+
+
+= SED =
+== SED: useful applications  ==
+If you need only a few specific lines out of a long list, just try this
+script.
+The first and last item are included ! In this example, the sed editor
+would print line 14 - 19 on standard out.
+ sed '14,19!d' your.file
+
+== How to delete any line in a file ? ==
+Sometimes it comes handy to delete some specific lines, e.g. the first
+line of a table column, so that plotting is possible with this data.
+SED can help you very easily in this case with the command line :
+ cat input.file | sed -e '1d' > temp.dat
+The parameters in the sed command are defined as the following:
+ * '1d' = delete the first line
+ *   -e = read in the new file
+
+== LINKS ==
+http://sed.sourceforge.net/sed1line_de.html
