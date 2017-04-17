@@ -30,7 +30,6 @@ find . -name "*.cpp" | xargs ctags --append --declarations --globals --members -
 # add submodules
 ```
 git submodule add https://github.com/vim-scripts/VisIncr.git vim/pack/pluginRepos/start/VisIncr
-git add .gitmodules vim/pack/pluginRepos/start/VisIncr/
 git commit -m "added plugin VisIncr"
 ```
 
@@ -63,21 +62,22 @@ sudo apt-get install pep8
  - VisIncr https://github.com/vim-scripts/VisIncrcl
  - Colour-Sampler-Pack https://github.com/vim-scripts/Colour-Sampler-Pack
  - vim-colors-solarized https://github.com/altercation/vim-colors-solarized
- - csapprox ?
- - fugitive
- - git ?
- - makegreen ?
- - nerdcommenter
- - nerdtree
- - omnicppcomplete
- - pep8
- - pydoc
- - pyflakes ?
- - tagbar
- - taglist
- - tasklist
- - vim-fswitch ?
- - vimwiki
+ - csapprox https://github.com/vim-scripts/CSApprox.git
+ - fugitive https://github.com/tpope/vim-fugitive.git
+
+
+
+ - nerdcommenter https://github.com/scrooloose/nerdcommenter.git
+ - nerdtree https://github.com/vim-scripts/The-NERD-tree.git
+ - omnicppcomplete https://github.com/vim-scripts/OmniCppComplete.git
+ - pep8 https://github.com/vim-scripts/pep8.git
+ - pydoc https://github.com/fs111/pydoc.vim.git
+ - tagbar git://github.com/majutsushi/tagbar
+ - taglist https://github.com/vim-scripts/taglist.vim.git
+ - tasklist https://github.com/vim-scripts/TaskList.vim.git
+ - vim-fswitch https://github.com/derekwyatt/vim-fswitch.git
+ - vimwiki  https://github.com/vim-scripts/vimwiki.git
+ - VimLatex git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex
 
 # new plugins
  - https://github.com/ramele/agrep
@@ -85,3 +85,4 @@ sudo apt-get install pep8
  - https://github.com/metakirby5/codi.vim
  - https://github.com/metakirby5/codi.vim
  - https://valloric.github.io/YouCompleteMe/
+ - https://github.com/vim-syntastic/syntastic

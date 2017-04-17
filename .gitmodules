@@ -13,3 +13,6 @@
 [submodule "vim/pack/pluginRepos/start/fugitive"]
 	path = vim/pack/pluginRepos/start/fugitive
 	url = https://github.com/tpope/vim-fugitive.git
+[submodule "vim/pack/pluginRepos/start/nerdcommenter"]
+	path = vim/pack/pluginRepos/start/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter.git
