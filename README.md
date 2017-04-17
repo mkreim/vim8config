@@ -47,11 +47,19 @@ rm -Rf .git/modules/vim/pack/pluginRepos/start/VisIncr
 git commit -m "removed plugin VisIncr"
 ```
 
+# load opt modules
+```
+:packadd <name>
+```
+
 # install stuff
 
 ```
 sudo apt-get install pep8 exuberant-ctags
 ```
+
+# TODO
+- remove startup error message
 
 # links
 
