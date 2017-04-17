@@ -49,7 +49,8 @@ git commit -m "removed plugin VisIncr"
 
 # load opt modules
 ```
-:packadd <name>
+:packadd vim/pack/pluginRepos/opt/<name>
+:source vim/optconfig/<name>.vimrc
 ```
 
 # install stuff
@@ -57,9 +58,6 @@ git commit -m "removed plugin VisIncr"
 ```
 sudo apt-get install pep8 exuberant-ctags
 ```
-
-# TODO
-- remove startup error message
 
 # links
 
@@ -83,7 +81,7 @@ sudo apt-get install pep8 exuberant-ctags
  - tasklist https://github.com/vim-scripts/TaskList.vim.git
  - vim-fswitch https://github.com/derekwyatt/vim-fswitch.git
  - vimwiki  https://github.com/vim-scripts/vimwiki.git
- - VimLatex git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex
+ - VimLatex https://github.com/vim-latex/vim-latex
 
 # new plugins
  - https://github.com/ramele/agrep
