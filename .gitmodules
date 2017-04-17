@@ -16,3 +16,6 @@
 [submodule "vim/pack/pluginRepos/start/nerdcommenter"]
 	path = vim/pack/pluginRepos/start/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
+[submodule "vim/pack/pluginRepos/start/The-NERD-tree"]
+	path = vim/pack/pluginRepos/start/The-NERD-tree
+	url = https://github.com/vim-scripts/The-NERD-tree.git
