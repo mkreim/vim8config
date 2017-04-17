@@ -64,11 +64,12 @@ sudo apt-get install pep8
  - vim-colors-solarized https://github.com/altercation/vim-colors-solarized
  - csapprox https://github.com/vim-scripts/CSApprox.git
  - fugitive https://github.com/tpope/vim-fugitive.git
-
-
-
  - nerdcommenter https://github.com/scrooloose/nerdcommenter.git
  - nerdtree https://github.com/vim-scripts/The-NERD-tree.git
+ - nerdtree-tabs https://github.com/jistr/vim-nerdtree-tabs
+
+
+
  - omnicppcomplete https://github.com/vim-scripts/OmniCppComplete.git
  - pep8 https://github.com/vim-scripts/pep8.git
  - pydoc https://github.com/fs111/pydoc.vim.git

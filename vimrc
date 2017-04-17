@@ -442,9 +442,9 @@ let g:pep8_map='<leader>8'
 au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
-map <leader>n :NERDTreeToggle<CR>
-map <F10>  :NERDTreeToggle<CR>
-imap <F10> <Esc>:NERDTreeToggle<CR>
+map <leader>n :NERDTreeTabsToggle<CR>
+map <F10>  :NERDTreeTabsToggle<CR>
+imap <F10> <Esc>:NERDTreeTabsToggle<CR>
 " I also included the py.test vim plugin for those who prefer it. 
 " This plugin has a lot more functionality including executing 
 " individual tests by class, file, or method. You can also cycle

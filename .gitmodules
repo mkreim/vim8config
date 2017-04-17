@@ -19,3 +19,6 @@
 [submodule "vim/pack/pluginRepos/start/The-NERD-tree"]
 	path = vim/pack/pluginRepos/start/The-NERD-tree
 	url = https://github.com/vim-scripts/The-NERD-tree.git
+[submodule "vim/pack/pluginRepos/start/nerdtree-tabs"]
+	path = vim/pack/pluginRepos/start/nerdtree-tabs
+	url = https://github.com/jistr/vim-nerdtree-tabs.git
