@@ -40,3 +40,6 @@
 [submodule "vim/pack/pluginRepos/start/tasklist"]
 	path = vim/pack/pluginRepos/start/tasklist
 	url = https://github.com/vim-scripts/TaskList.vim.git
+[submodule "vim/pack/pluginRepos/start/fswitch"]
+	path = vim/pack/pluginRepos/start/fswitch
+	url = https://github.com/derekwyatt/vim-fswitch.git
