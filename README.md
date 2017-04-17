@@ -50,7 +50,7 @@ git commit -m "removed plugin VisIncr"
 # install stuff
 
 ```
-sudo apt-get install pep8
+sudo apt-get install pep8 exuberant-ctags
 ```
 
 # links
@@ -73,11 +73,12 @@ sudo apt-get install pep8
 
 
  - taglist https://github.com/vim-scripts/taglist.vim.git
+ - tagbar https://github.com/majutsushi/tagbar.git
  - tasklist https://github.com/vim-scripts/TaskList.vim.git
  - vim-fswitch https://github.com/derekwyatt/vim-fswitch.git
  - vimwiki  https://github.com/vim-scripts/vimwiki.git
+
  - VimLatex git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex
- - tagbar git://github.com/majutsushi/tagbar
 
 # new plugins
  - https://github.com/ramele/agrep
@@ -86,3 +87,4 @@ sudo apt-get install pep8
  - https://github.com/metakirby5/codi.vim
  - https://valloric.github.io/YouCompleteMe/
  - https://github.com/vim-syntastic/syntastic
+ - https://github.com/severin-lemaignan/vim-minimap
