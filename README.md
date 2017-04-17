@@ -67,18 +67,17 @@ sudo apt-get install pep8
  - nerdcommenter https://github.com/scrooloose/nerdcommenter.git
  - nerdtree https://github.com/vim-scripts/The-NERD-tree.git
  - nerdtree-tabs https://github.com/jistr/vim-nerdtree-tabs
-
-
-
  - omnicppcomplete https://github.com/vim-scripts/OmniCppComplete.git
  - pep8 https://github.com/vim-scripts/pep8.git
  - pydoc https://github.com/fs111/pydoc.vim.git
- - tagbar git://github.com/majutsushi/tagbar
+
+
  - taglist https://github.com/vim-scripts/taglist.vim.git
  - tasklist https://github.com/vim-scripts/TaskList.vim.git
  - vim-fswitch https://github.com/derekwyatt/vim-fswitch.git
  - vimwiki  https://github.com/vim-scripts/vimwiki.git
  - VimLatex git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex
+ - tagbar git://github.com/majutsushi/tagbar
 
 # new plugins
  - https://github.com/ramele/agrep
