@@ -34,3 +34,6 @@
 [submodule "vim/pack/pluginRepos/start/taglist"]
 	path = vim/pack/pluginRepos/start/taglist
 	url = https://github.com/vim-scripts/taglist.vim.git
+[submodule "vim/pack/pluginRepos/start/tagbar"]
+	path = vim/pack/pluginRepos/start/tagbar
+	url = https://github.com/majutsushi/tagbar.git
