@@ -70,14 +70,11 @@ sudo apt-get install pep8 exuberant-ctags
  - omnicppcomplete https://github.com/vim-scripts/OmniCppComplete.git
  - pep8 https://github.com/vim-scripts/pep8.git
  - pydoc https://github.com/fs111/pydoc.vim.git
-
-
  - taglist https://github.com/vim-scripts/taglist.vim.git
  - tagbar https://github.com/majutsushi/tagbar.git
  - tasklist https://github.com/vim-scripts/TaskList.vim.git
  - vim-fswitch https://github.com/derekwyatt/vim-fswitch.git
  - vimwiki  https://github.com/vim-scripts/vimwiki.git
-
  - VimLatex git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex
 
 # new plugins

@@ -46,3 +46,6 @@
 [submodule "vim/pack/pluginRepos/start/vimwiki"]
 	path = vim/pack/pluginRepos/start/vimwiki
 	url = https://github.com/vim-scripts/vimwiki.git
+[submodule "vim/pack/pluginRepos/opt/vim-latex"]
+	path = vim/pack/pluginRepos/opt/vim-latex
+	url = https://github.com/vim-latex/vim-latex.git
