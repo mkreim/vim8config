@@ -49,3 +49,6 @@
 [submodule "vim/pack/pluginRepos/opt/vim-latex"]
 	path = vim/pack/pluginRepos/opt/vim-latex
 	url = https://github.com/vim-latex/vim-latex.git
+[submodule "vim/pack/pluginRepos/start/agrep"]
+	path = vim/pack/pluginRepos/start/agrep
+	url = https://github.com/ramele/agrep.git
