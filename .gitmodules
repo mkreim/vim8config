@@ -52,3 +52,6 @@
 [submodule "vim/pack/pluginRepos/start/agrep"]
 	path = vim/pack/pluginRepos/start/agrep
 	url = https://github.com/ramele/agrep.git
+[submodule "vim/pack/pluginRepos/start/asyncrun"]
+	path = vim/pack/pluginRepos/start/asyncrun
+	url = https://github.com/skywind3000/asyncrun.vim.git
