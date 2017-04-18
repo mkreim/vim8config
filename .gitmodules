@@ -55,3 +55,6 @@
 [submodule "vim/pack/pluginRepos/start/asyncrun"]
 	path = vim/pack/pluginRepos/start/asyncrun
 	url = https://github.com/skywind3000/asyncrun.vim.git
+[submodule "vim/pack/pluginRepos/start/codi"]
+	path = vim/pack/pluginRepos/start/codi
+	url = https://github.com/metakirby5/codi.vim.git

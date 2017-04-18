@@ -18,6 +18,8 @@ a bunch of config files for my vim. Its not written to be shared and not useful 
 
  - :Pyhelp <module> to preview documentation
 
+ - :Agrep -r 'foo.*bar' ~/my_project
+
 # generating tags
 
 ```
@@ -43,7 +45,7 @@ git commit -m "updated submodules"
 ```
 git submodule deinit vim/pack/pluginRepos/start/VisIncr
 git rm vim/pack/pluginRepos/start/VisIncr
-rm -Rf .git/modules/vim/pack/pluginRepos/start/VisIncr
+rm -rf .git/modules/vim/pack/pluginRepos/start/VisIncr
 git commit -m "removed plugin VisIncr"
 ```
 
@@ -82,11 +84,14 @@ sudo apt-get install pep8 exuberant-ctags
  - vim-fswitch https://github.com/derekwyatt/vim-fswitch.git
  - vimwiki  https://github.com/vim-scripts/vimwiki.git
  - VimLatex https://github.com/vim-latex/vim-latex
- - minimap https://github.com/severin-lemaignan/vim-minimap
+ - agrep https://github.com/ramele/agrep
+ - asyncrun https://github.com/skywind3000/asyncrun.vim
+ - codi https://github.com/metakirby5/codi.vim
 
 # new plugins
- - https://github.com/ramele/agrep
- - https://github.com/skywind3000/asyncrun.vim
- - https://github.com/metakirby5/codi.vim
  - https://valloric.github.io/YouCompleteMe/
  - https://github.com/vim-syntastic/syntastic
+
+
+ https://github.com/mh21/errormarker.vim
+ https://github.com/skywind3000/asyncrun.vim/wiki/Cooperate-with-famous-plugins 
