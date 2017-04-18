@@ -22,7 +22,8 @@ a bunch of config files for my vim. Its not written to be shared and not useful 
 
 # generating tags
 
-``` touch /home/mkreim/bin/opencv/opencv.tags
+``` 
+touch /home/mkreim/bin/opencv/opencv.tags
 find . -name "*.h" | xargs ctags --append --declarations --globals --members -o /home/mkreim/bin/opencv/opencv.tags -T --update
 find . -name "*.hpp" | xargs ctags --append --declarations --globals --members -o /home/mkreim/bin/opencv/opencv.tags -T --update
 find . -name "*.cpp" | xargs ctags --append --declarations --globals --members -o /home/mkreim/bin/opencv/opencv.tags -T --update
@@ -66,9 +67,11 @@ cd vim/src/
 ./configure --prefix=/home/mkreim/bin/vim8/ --with-features=huge --enable-pythoninterp=yes --enable-cscope --with-compiledby='Michael Kreim  <michael@perfect-kreim.de>' && make -j 4 && make install
 mkdir -pv /home/mkreim/config/vim8config/
 cd /home/mkreim/config/vim8config/
+git clone git@github.com:mkreim/vim8config.git
 bash SetSoftLinks.sh
 #activate submodules ??
 cd ~/.vim/pack/pluginRepos/start/YouCompleteMe/
+git submodule update --init --recursive
 ./install.py --clang-completer
 ```
 
@@ -98,10 +101,8 @@ cd ~/.vim/pack/pluginRepos/start/YouCompleteMe/
  - agrep https://github.com/ramele/agrep
  - asyncrun https://github.com/skywind3000/asyncrun.vim
  - syntastic https://github.com/vim-syntastic/syntastic
+ - YouCompleteMe https://valloric.github.io/YouCompleteMe/
 
 # new plugins
- - https://valloric.github.io/YouCompleteMe/
-
-
- https://github.com/mh21/errormarker.vim
- https://github.com/skywind3000/asyncrun.vim/wiki/Cooperate-with-famous-plugins 
+ - https://github.com/mh21/errormarker.vim
+ - https://github.com/skywind3000/asyncrun.vim/wiki/Cooperate-with-famous-plugins 
