@@ -22,8 +22,7 @@ a bunch of config files for my vim. Its not written to be shared and not useful 
 
 # generating tags
 
-```
-touch /home/mkreim/bin/opencv/opencv.tags
+``` touch /home/mkreim/bin/opencv/opencv.tags
 find . -name "*.h" | xargs ctags --append --declarations --globals --members -o /home/mkreim/bin/opencv/opencv.tags -T --update
 find . -name "*.hpp" | xargs ctags --append --declarations --globals --members -o /home/mkreim/bin/opencv/opencv.tags -T --update
 find . -name "*.cpp" | xargs ctags --append --declarations --globals --members -o /home/mkreim/bin/opencv/opencv.tags -T --update
@@ -58,7 +57,19 @@ git commit -m "removed plugin VisIncr"
 # install stuff
 
 ```
-sudo apt-get install pep8 exuberant-ctags
+sudo apt-get install pep8 exuberant-ctags pylint python-flake8 cppcheck build-essential cmake python-dev python3-dev
+sudo apt-get build-dep vim-gnome
+mkdir -pv /home/mkreim/bin/vim8/install/
+cd /home/mkreim/bin/vim8/install/
+git clone https://github.com/vim/vim.git
+cd vim/src/
+./configure --prefix=/home/mkreim/bin/vim8/ --with-features=huge --enable-pythoninterp=yes --enable-cscope --with-compiledby='Michael Kreim  <michael@perfect-kreim.de>' && make -j 4 && make install
+mkdir -pv /home/mkreim/config/vim8config/
+cd /home/mkreim/config/vim8config/
+bash SetSoftLinks.sh
+#activate submodules ??
+cd ~/.vim/pack/pluginRepos/start/YouCompleteMe/
+./install.py --clang-completer
 ```
 
 # links
