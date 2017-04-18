@@ -58,6 +58,3 @@
 [submodule "vim/pack/pluginRepos/start/syntastic"]
 	path = vim/pack/pluginRepos/start/syntastic
 	url = https://github.com/vim-syntastic/syntastic.git
-[submodule "vim/pack/pluginRepos/start/YouCompleteMe"]
-	path = vim/pack/pluginRepos/start/YouCompleteMe
-	url = https://github.com/Valloric/YouCompleteMe.git
