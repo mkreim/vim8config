@@ -82,12 +82,11 @@ sudo apt-get install pep8 exuberant-ctags
  - vim-fswitch https://github.com/derekwyatt/vim-fswitch.git
  - vimwiki  https://github.com/vim-scripts/vimwiki.git
  - VimLatex https://github.com/vim-latex/vim-latex
+ - minimap https://github.com/severin-lemaignan/vim-minimap
 
 # new plugins
  - https://github.com/ramele/agrep
  - https://github.com/skywind3000/asyncrun.vim
  - https://github.com/metakirby5/codi.vim
- - https://github.com/metakirby5/codi.vim
  - https://valloric.github.io/YouCompleteMe/
  - https://github.com/vim-syntastic/syntastic
- - https://github.com/severin-lemaignan/vim-minimap

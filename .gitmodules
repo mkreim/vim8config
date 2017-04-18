@@ -49,6 +49,3 @@
 [submodule "vim/pack/pluginRepos/opt/vim-latex"]
 	path = vim/pack/pluginRepos/opt/vim-latex
 	url = https://github.com/vim-latex/vim-latex.git
-[submodule "vim/pack/pluginRepos/start/minimap"]
-	path = vim/pack/pluginRepos/start/minimap
-	url = https://github.com/severin-lemaignan/vim-minimap.git
