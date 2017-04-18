@@ -86,11 +86,10 @@ sudo apt-get install pep8 exuberant-ctags
  - VimLatex https://github.com/vim-latex/vim-latex
  - agrep https://github.com/ramele/agrep
  - asyncrun https://github.com/skywind3000/asyncrun.vim
- - codi https://github.com/metakirby5/codi.vim
+ - syntastic https://github.com/vim-syntastic/syntastic
 
 # new plugins
  - https://valloric.github.io/YouCompleteMe/
- - https://github.com/vim-syntastic/syntastic
 
 
  https://github.com/mh21/errormarker.vim
