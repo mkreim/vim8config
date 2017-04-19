@@ -29,6 +29,11 @@ find . -name "*.hpp" | xargs ctags --append --declarations --globals --members -
 find . -name "*.cpp" | xargs ctags --append --declarations --globals --members -o /home/mkreim/bin/opencv/opencv.tags -T --update
 ```
 
+```
+ctags -f opencv.tags --recurse=yes .
+```
+
+
 # add submodules
 ```
 git submodule add https://github.com/vim-scripts/VisIncr.git vim/pack/pluginRepos/start/VisIncr
@@ -101,8 +106,8 @@ git submodule update --init --recursive
  - agrep https://github.com/ramele/agrep
  - asyncrun https://github.com/skywind3000/asyncrun.vim
  - syntastic https://github.com/vim-syntastic/syntastic
- - YouCompleteMe https://valloric.github.io/YouCompleteMe/
 
 # new plugins
  - https://github.com/mh21/errormarker.vim
  - https://github.com/skywind3000/asyncrun.vim/wiki/Cooperate-with-famous-plugins 
+ - YouCompleteMe https://valloric.github.io/YouCompleteMe/
