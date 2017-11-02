@@ -123,7 +123,7 @@
 " http://www.vim.org/scripts/script.php?script_id=2407
     autocmd BufEnter *.m    compiler mlint
 " and also for python
-    autocmd BufNewFile,BufRead *.py compiler python
+    autocmd BufNewFile,BufRead *.py compiler pep8
 
 " deutsche Umlaute automatisch beim Schreiben von html,htm,inc oder php Dateien ersetzten
     autocmd BufWrite *.[Hh][Tt][Mm][Ll],*.[hH][tT][mM],*.[pP][hH][pP],*.[iI][nN][cC] silent %s/ö/\&ouml;/g
@@ -460,4 +460,9 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" yapf support
+autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr><C-o>
+autocmd BufWritePre *.py 0,$!yapf
+
 " --- EOF ---
