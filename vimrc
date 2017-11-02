@@ -71,7 +71,7 @@
     "imap <F11>  <ESC>:wa<CR>:call SendCurrentLineToTmuxSession()<CR>
     "imap <F10>  <ESC>:wa<CR>:call SendCurrentLineToTmuxSession()<CR>
 
-    source ~/config/vimconfig/MyCpp/MyCpp.vim
+    source ~/config/vim8config/MyCpp/MyCpp.vim
     "iab irev <C-R>=MyReviewComment()<CR>
 
     " C / C++ development
@@ -87,6 +87,7 @@
     iab idate <C-R>=strftime("%c")<CR>
     iab ToDo TODO
     iab todo TODO
+    iab ibreak import ipdb; ipdb.set_trace()
 
 " color scheme
     if has('gui_running')
@@ -138,10 +139,6 @@
     let g:vimwiki_list = [{'path': '~/config/vim8config/VimWiki/vimwiki/', 'path_html': '~/config/vim8config/VimWiki/vimwiki_html/'}, {'path': '~/todo/wiki/', 'path_html': '~/todo/html/'}]
     map <leader>to 2<leader>wt
     map <leader>di 2<leader>w<leader>w
-
-" config for TODO system
-source ~/todo/scripts/todo_vimconfig.vim
-
 
 " highlight lines in matlab scripts that exceed 75 columns
 " http://vim.wikia.com/wiki/Highlight_long_lines
