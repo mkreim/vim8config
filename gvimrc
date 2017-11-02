@@ -18,6 +18,13 @@ elseif hostname() == 'da-cons-mobile02'
     set background=dark
     colorscheme solarized
     winpos 900 0
+elseif hostname() == 'netsyno-terra-01'
+    set lines=60 columns=100
+    set gfn=DejaVu\ Sans\ Mono\ 13
+    syntax enable
+    set background=light
+    colorscheme solarized
+    winpos 900 0
 else
     set lines=30 columns=100
     set gfn=DejaVu\ Sans\ Mono\ 12
