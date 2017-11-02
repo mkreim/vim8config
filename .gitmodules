@@ -56,7 +56,7 @@
 	path = vim/pack/pluginRepos/start/asyncrun
 	url = https://github.com/skywind3000/asyncrun.vim.git
 [submodule "vim/pack/pluginRepos/start/syntastic"]
-	path = vim/pack/pluginRepos/start/syntastic
+	path = vim/pack/pluginRepos/opt/syntastic
 	url = https://github.com/vim-syntastic/syntastic.git
 [submodule "vim/pack/pluginRepos/start/ale"]
 	path = vim/pack/pluginRepos/start/ale

@@ -449,29 +449,17 @@ autocmd QuickFixCmdPost    l* nested lwindow
 set exrc
 set secure
 
-
-" syntastic config
-" https://github.com/vim-syntastic/syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
 " yapf support
 autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr><C-o>
 autocmd BufWritePre *.py 0,$!yapf
 
 " prettier
 " max line length that prettier will wrap on
-g:prettier#config#print_width = 100
+let g:prettier#config#print_width = 100
 " single quotes over double quotes
-g:prettier#config#single_quote = 'true'
+let g:prettier#config#single_quote = 'true'
 " none|es5|all
-g:prettier#config#trailing_comma = 'es5'
+let g:prettier#config#trailing_comma = 'es5'
 let g:prettier#autoformat = 0
 autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
 
