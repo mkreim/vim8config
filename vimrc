@@ -121,9 +121,9 @@
 
 " Integration of the mlint Matlab code checker with the :make command 
 " http://www.vim.org/scripts/script.php?script_id=2407
-    autocmd BufEnter *.m    compiler mlint
+"   autocmd BufEnter *.m    compiler mlint
 " and also for python
-    autocmd BufNewFile,BufRead *.py compiler pep8
+"   autocmd BufNewFile,BufRead *.py compiler pep8
 
 " deutsche Umlaute automatisch beim Schreiben von html,htm,inc oder php Dateien ersetzten
     autocmd BufWrite *.[Hh][Tt][Mm][Ll],*.[hH][tT][mM],*.[pP][hH][pP],*.[iI][nN][cC] silent %s/ö/\&ouml;/g
