@@ -61,6 +61,7 @@
     " https://stackoverflow.com/questions/235439/vim-80-column-layout-concerns
     if exists('+colorcolumn')
         set colorcolumn=100
+    endif
 
 " key short cuts
     nmap - g<C-]>

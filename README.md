@@ -106,6 +106,9 @@ git submodule update --init --recursive
  - agrep https://github.com/ramele/agrep
  - asyncrun https://github.com/skywind3000/asyncrun.vim
  - syntastic https://github.com/vim-syntastic/syntastic
+ - ale https://github.com/w0rp/ale.git
+ - vim-prettier https://github.com/prettier/vim-prettier.git
+ - ultisnips https://github.com/SirVer/ultisnips
 
 # new plugins
  - https://github.com/mh21/errormarker.vim
