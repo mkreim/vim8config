@@ -64,3 +64,6 @@
 [submodule "vim/pack/pluginRepos/start/vim-prettier"]
 	path = vim/pack/pluginRepos/start/vim-prettier
 	url = https://github.com/prettier/vim-prettier.git
+[submodule "vim/pack/pluginRepos/start/ultisnip"]
+	path = vim/pack/pluginRepos/start/ultisnip
+	url = https://github.com/SirVer/ultisnips.git
