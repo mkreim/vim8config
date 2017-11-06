@@ -110,6 +110,7 @@ git submodule update --init --recursive
  - vim-prettier https://github.com/prettier/vim-prettier.git
  - ultisnips https://github.com/SirVer/ultisnips
  - vim-surround https://github.com/tpope/vim-surround
+ - ctrlP https://github.com/ctrlpvim/ctrlp.vim
 
 # new plugins
  - https://github.com/mh21/errormarker.vim
