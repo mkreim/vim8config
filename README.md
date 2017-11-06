@@ -109,6 +109,7 @@ git submodule update --init --recursive
  - ale https://github.com/w0rp/ale.git
  - vim-prettier https://github.com/prettier/vim-prettier.git
  - ultisnips https://github.com/SirVer/ultisnips
+ - vim-surround https://github.com/tpope/vim-surround
 
 # new plugins
  - https://github.com/mh21/errormarker.vim
