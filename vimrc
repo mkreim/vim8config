@@ -466,6 +466,8 @@ let g:prettier#config#single_quote = 'true'
 " none|es5|all
 let g:prettier#config#trailing_comma = 'es5'
 let g:prettier#autoformat = 0
+let g:prettier#exec_cmd_async = 1
+let g:prettier#quickfix_enabled = 0
 autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -477,7 +479,15 @@ let g:UltiSnipsJumpBackwardTrigger="<c-g>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-let g:UltiSnipsSnippetsDir="/home/mkreim/config/vim8config/UltiSnips"
+let g:UltiSnipsSnippetsDir="/home/mkreim/config/vim8config/vim/UltiSnips/"
+
+
+" ale
+let g:ale_lint_on_text_changed="never"
+let g:ale_lint_on_enter=0
+let g:ale_lint_on_save=1
+let g:ale_lint_on_filetype_changed=0
+let g:ale_lint_on_insert_leave=0
 
 
 " Load all plugins now.

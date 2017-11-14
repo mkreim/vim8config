@@ -1,7 +1,14 @@
 snippet clog "console.log(...)"
-console.log(${0:out})
+console.log(${1})
 endsnippet
 
 snippet #! "shebang"
-#!/usr/bin/env node
+#!/usr/bin/env nodejs
+endsnippet
+
+snippet newmsg "new intl message"
+${1}: {
+	id: '${2:`vim_snippets#Filename('$2', 'name')`}.$1',
+	defaultMessage: '${3}',
+},
 endsnippet
