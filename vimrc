@@ -17,15 +17,18 @@
     "You can also tell Vim to ignore the case  
     set ignorecase
     " Automatically indent when adding a curly bracket, etc.
-    set smartindent
+    "set smartindent
     " Tabs should be converted to a group of 4 spaces.
     " This is the official Python convention
     " (http://www.python.org/dev/peps/pep-0008/)
     " I didn't find a good reason to not use it everywhere.
     set shiftwidth=4
     set tabstop=4
-    set expandtab
-    set smarttab
+    set expandtab ts=4 sw=4 ai
+    autocmd FileType javascript set tabstop=2
+    autocmd FileType javascript set shiftwidth=2
+    autocmd FileType javascript set expandtab ts=2 sw=2 ai
+    "set smarttab
     " Display incomplete commands.
     set showcmd
     " Show autocomplete menus.
@@ -75,6 +78,8 @@
     imap <F12>  <ESC>:wa<CR>:call SendCMDToTmuxSession()<CR>
     "imap <F11>  <ESC>:wa<CR>:call SendCurrentLineToTmuxSession()<CR>
     "imap <F10>  <ESC>:wa<CR>:call SendCurrentLineToTmuxSession()<CR>
+    map <F5> :wa<CR>:!reload-chrome.sh<CR>
+    imap <F5> <ESC>:wa<CR>:!reload-chrome.sh<CR>
 
     source ~/config/vim8config/MyCpp/MyCpp.vim
     "iab irev <C-R>=MyReviewComment()<CR>
@@ -93,6 +98,7 @@
     iab ToDo TODO
     iab todo TODO
     iab ibreak import ipdb; ipdb.set_trace()
+    iab iprofile import cProfile; pr = cProfile.Profile(); pr.enable(); pr.disable(); pr.dump_stats('stats.prof');
 
 " color scheme
     if has('gui_running')
@@ -131,13 +137,13 @@
 "   autocmd BufNewFile,BufRead *.py compiler pep8
 
 " deutsche Umlaute automatisch beim Schreiben von html,htm,inc oder php Dateien ersetzten
-    autocmd BufWrite *.[Hh][Tt][Mm][Ll],*.[hH][tT][mM],*.[pP][hH][pP],*.[iI][nN][cC] silent %s/ö/\&ouml;/g
-    autocmd BufWrite *.[Hh][Tt][Mm][Ll],*.[hH][tT][mM],*.[pP][hH][pP],*.[iI][nN][cC] silent %s/Ö/\&Ouml;/g
-    autocmd BufWrite *.[Hh][Tt][Mm][Ll],*.[hH][tT][mM],*.[pP][hH][pP],*.[iI][nN][cC] silent %s/ü/\&uuml;/g
-    autocmd BufWrite *.[Hh][Tt][Mm][Ll],*.[hH][tT][mM],*.[pP][hH][pP],*.[iI][nN][cC] silent %s/Ü/\&Uuml;/g
-    autocmd BufWrite *.[Hh][Tt][Mm][Ll],*.[hH][tT][mM],*.[pP][hH][pP],*.[iI][nN][cC] silent %s/ä/\&auml;/g
-    autocmd BufWrite *.[Hh][Tt][Mm][Ll],*.[hH][tT][mM],*.[pP][hH][pP],*.[iI][nN][cC] silent %s/Ä/\&Auml;/g
-    autocmd BufWrite *.[Hh][Tt][Mm][Ll],*.[hH][tT][mM],*.[pP][hH][pP],*.[iI][nN][cC] silent %s/ß/\&szlig;/g
+"   autocmd BufWrite *.[Hh][Tt][Mm][Ll],*.[hH][tT][mM],*.[pP][hH][pP],*.[iI][nN][cC] silent %s/ö/\&ouml;/g
+"   autocmd BufWrite *.[Hh][Tt][Mm][Ll],*.[hH][tT][mM],*.[pP][hH][pP],*.[iI][nN][cC] silent %s/Ö/\&Ouml;/g
+"   autocmd BufWrite *.[Hh][Tt][Mm][Ll],*.[hH][tT][mM],*.[pP][hH][pP],*.[iI][nN][cC] silent %s/ü/\&uuml;/g
+"   autocmd BufWrite *.[Hh][Tt][Mm][Ll],*.[hH][tT][mM],*.[pP][hH][pP],*.[iI][nN][cC] silent %s/Ü/\&Uuml;/g
+"   autocmd BufWrite *.[Hh][Tt][Mm][Ll],*.[hH][tT][mM],*.[pP][hH][pP],*.[iI][nN][cC] silent %s/ä/\&auml;/g
+"   autocmd BufWrite *.[Hh][Tt][Mm][Ll],*.[hH][tT][mM],*.[pP][hH][pP],*.[iI][nN][cC] silent %s/Ä/\&Auml;/g
+"   autocmd BufWrite *.[Hh][Tt][Mm][Ll],*.[hH][tT][mM],*.[pP][hH][pP],*.[iI][nN][cC] silent %s/ß/\&szlig;/g
 
 " VimWiki
     "autocmd BufWritePost *.wiki silent VimwikiAll2HTML "gen HTML when saving
@@ -455,8 +461,8 @@ set exrc
 set secure
 
 " yapf support
-autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr><C-o>
-autocmd BufWritePre *.py 0,$!yapf
+autocmd FileType python nnoremap <leader>y :0,$!/home/mkreim/.virtualenvs/ssf/bin/yapf<Cr><C-o>
+autocmd BufWritePre *.py 0,$!/home/mkreim/.virtualenvs/ssf/bin/yapf
 
 " prettier
 " max line length that prettier will wrap on
@@ -465,10 +471,13 @@ let g:prettier#config#print_width = 100
 let g:prettier#config#single_quote = 'true'
 " none|es5|all
 let g:prettier#config#trailing_comma = 'es5'
+" tabs 2 spaces
+let g:prettier#config#tab_with = 2
+let g:prettier#config#use_tabs = 'false'
 let g:prettier#autoformat = 0
-let g:prettier#exec_cmd_async = 1
+let g:prettier#exec_cmd_async = 0
 let g:prettier#quickfix_enabled = 0
-autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql PrettierAsync
+autocmd BufWritePre,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql Prettier
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 filetype plugin indent on
@@ -488,6 +497,7 @@ let g:ale_lint_on_enter=0
 let g:ale_lint_on_save=1
 let g:ale_lint_on_filetype_changed=0
 let g:ale_lint_on_insert_leave=0
+let g:ale_linters = {'python': ['/home/mkreim/.virtualenvs/ssf/bin/yapf'], 'javascript': ['prettier']}
 
 
 " Load all plugins now.
