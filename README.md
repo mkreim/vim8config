@@ -111,6 +111,7 @@ git submodule update --init --recursive
  - ultisnips https://github.com/SirVer/ultisnips
  - vim-surround https://github.com/tpope/vim-surround
  - ctrlP https://github.com/ctrlpvim/ctrlp.vim
+ - zeavim https://github.com/KabbAmine/zeavim.vim
 
 # new plugins
  - https://github.com/mh21/errormarker.vim
