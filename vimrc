@@ -492,12 +492,12 @@ let g:UltiSnipsSnippetsDir="/home/mkreim/config/vim8config/vim/UltiSnips/"
 
 
 " ale
-let g:ale_lint_on_text_changed="never"
-let g:ale_lint_on_enter=0
-let g:ale_lint_on_save=1
-let g:ale_lint_on_filetype_changed=0
-let g:ale_lint_on_insert_leave=0
-let g:ale_linters = {'python': ['/home/mkreim/.virtualenvs/ssf/bin/yapf'], 'javascript': ['prettier']}
+"let g:ale_lint_on_text_changed="never"
+"let g:ale_lint_on_enter=0
+"let g:ale_lint_on_save=0
+"let g:ale_lint_on_filetype_changed=0
+"let g:ale_lint_on_insert_leave=0
+"let g:ale_linters = {'python': ['/home/mkreim/.virtualenvs/ssf/bin/yapf'], 'javascript': ['prettier']}
 
 
 " Load all plugins now.
