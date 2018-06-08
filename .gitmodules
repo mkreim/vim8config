@@ -79,3 +79,6 @@
 [submodule "vim/pack/pluginRepos/start/completor"]
 	path = vim/pack/pluginRepos/start/completor
 	url = https://github.com/maralla/completor.vim.git
+[submodule "vim/pack/pluginRepos/start/previm"]
+	path = vim/pack/pluginRepos/start/previm
+	url = https://github.com/kannokanno/previm.git

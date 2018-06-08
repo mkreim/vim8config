@@ -91,6 +91,8 @@
     imap <F7> <ESC>:w<CR>:FSSplitAbove<CR>
     "map  <F4> <ESC>:tabnew<CR>:Project<CR>
     "imap <F4> <ESC>:tabnew<CR>:Project<CR>
+    
+    map <F4> <ESC>:AsyncRun code %<CR>
 
 
 " abbrevations
@@ -498,6 +500,21 @@ let g:UltiSnipsSnippetsDir="/home/mkreim/config/vim8config/vim/UltiSnips/"
 "let g:ale_lint_on_filetype_changed=0
 "let g:ale_lint_on_insert_leave=0
 "let g:ale_linters = {'python': ['/home/mkreim/.virtualenvs/ssf/bin/yapf'], 'javascript': ['prettier']}
+
+
+" completor
+let g:completor_python_binary = '/home/mkreim/.virtualenvs/vim-tools/bin/python'
+let g:completor_node_binary = '/home/mkreim/.nvm/versions/node/v8.11.1/bin/node'
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+
+" previm
+let g:previm_open_cmd = 'google-chrome'
+augroup PrevimSettings
+    autocmd!
+    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+augroup END
 
 
 " Load all plugins now.
