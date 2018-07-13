@@ -46,6 +46,9 @@
     " autocmd BufEnter * lcd %:p:h
     set spelllang=en,de
 
+    " add file suffixes to open files using gf, C-W gf, or C-W f
+    set suffixesadd=.js,.jsx,.py,.md,.css
+
     " folding
     " mark folds with {{{N for N={1,2,3...} the foldlevel
     " or {{{ bla }}}
@@ -93,6 +96,7 @@
     "imap <F4> <ESC>:tabnew<CR>:Project<CR>
     
     map <F4> <ESC>:AsyncRun code %<CR>
+    map <F3> <ESC>:AsyncRun git gui<CR>
 
 
 " abbrevations
@@ -131,6 +135,11 @@
 
 " programming comments
     map <c-y> <plug>NERDCommenterToggle
+
+
+" NERDCommenter config
+    let g:NERDSpaceDelims=1
+    let g:NERDRemoveExtraSpaces=1
 
 " Integration of the mlint Matlab code checker with the :make command 
 " http://www.vim.org/scripts/script.php?script_id=2407
@@ -510,7 +519,7 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 
 " previm
-let g:previm_open_cmd = 'google-chrome'
+let g:previm_open_cmd = 'google-chrome --new-window'
 augroup PrevimSettings
     autocmd!
     autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown

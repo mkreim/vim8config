@@ -114,6 +114,7 @@ git submodule update --init --recursive
  - zeavim https://github.com/KabbAmine/zeavim.vim
  - completor https://github.com/maralla/completor.vim
  - previm https://github.com/kannokanno/previm.git
+ - cheat.sh vim/UltiSnips/javascript.snippets
 
 # new plugins
  - https://github.com/mh21/errormarker.vim

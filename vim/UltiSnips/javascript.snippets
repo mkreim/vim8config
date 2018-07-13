@@ -12,3 +12,68 @@ ${1}: {
 	defaultMessage: '${3}',
 },
 endsnippet
+
+
+snippet ignlint "eslint disaple next line"
+// Note: ${1}
+// eslint-disable-next-line ${2}
+endsnippet
+
+
+snippet intlclass "react component class with intl binding"
+import React from 'react';
+import { injectIntl, defineMessages } from 'react-intl';
+
+const messages = defineMessages({
+	newmsg
+});
+
+class ${1} extends React.PureComponent {
+	constructor(props) {
+		super(props);
+}
+
+render() {
+	const { intl: {formatMessage} } = this.props;
+	
+	return(
+		<div>
+		${2}
+		</div>
+	);
+	}
+}
+export default injectIntl($1);
+endsnippet
+
+snippet reactclass "react component class"
+class ${1} extends React.PureComponent {
+	constructor(props) {
+		super(props);
+}
+
+render() {
+	const {${2}} = this.props;
+	
+	return(
+		<div>
+		${3}
+		</div>
+	);
+	}
+}
+export default $1;
+endsnippet
+
+snippet bindthis "bind function to this"
+this.${1} = this.$1.bind(this);
+endsnippet
+
+
+snippet newprops "componentDidUpdate()"
+componentDidUpdate(prevProps, prevState) {
+	if(prevProps.${1} !== this.props.$1 || prevState.${2} !== this.state.$2) {
+	${3}
+	}
+}
+endsnippet

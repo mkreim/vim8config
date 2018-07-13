@@ -82,3 +82,6 @@
 [submodule "vim/pack/pluginRepos/start/previm"]
 	path = vim/pack/pluginRepos/start/previm
 	url = https://github.com/kannokanno/previm.git
+[submodule "vim/pack/pluginRepos/start/cheat.sh"]
+	path = vim/pack/pluginRepos/start/cheat.sh
+	url = https://github.com/dbeniamine/cheat.sh-vim.git
