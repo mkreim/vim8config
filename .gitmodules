@@ -85,3 +85,6 @@
 [submodule "vim/pack/pluginRepos/start/cheat.sh"]
 	path = vim/pack/pluginRepos/start/cheat.sh
 	url = https://github.com/dbeniamine/cheat.sh-vim.git
+[submodule "vim/pack/pluginRepos/start/codi"]
+	path = vim/pack/pluginRepos/start/codi
+	url = https://github.com/metakirby5/codi.vim.git

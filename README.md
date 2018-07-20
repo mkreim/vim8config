@@ -115,6 +115,7 @@ git submodule update --init --recursive
  - completor https://github.com/maralla/completor.vim
  - previm https://github.com/kannokanno/previm.git
  - cheat.sh vim/UltiSnips/javascript.snippets
+ - codi https://github.com/metakirby5/codi.vim.git
 
 # new plugins
  - https://github.com/mh21/errormarker.vim
