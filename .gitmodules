@@ -88,3 +88,9 @@
 [submodule "vim/pack/pluginRepos/start/codi"]
 	path = vim/pack/pluginRepos/start/codi
 	url = https://github.com/metakirby5/codi.vim.git
+[submodule "vim/pack/pluginRepos/start/vim-gutentags"]
+	path = vim/pack/pluginRepos/start/vim-gutentags
+	url = https://github.com/ludovicchabant/vim-gutentags.git
+[submodule "vim/pack/pluginRepos/start/vim-js-file-import"]
+	path = vim/pack/pluginRepos/start/vim-js-file-import
+	url = https://github.com/kristijanhusak/vim-js-file-import

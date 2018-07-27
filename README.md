@@ -121,3 +121,5 @@ git submodule update --init --recursive
  - https://github.com/mh21/errormarker.vim
  - https://github.com/skywind3000/asyncrun.vim/wiki/Cooperate-with-famous-plugins 
  - YouCompleteMe https://valloric.github.io/YouCompleteMe/
+ - vim-gutentags https://github.com/ludovicchabant/vim-gutentags
+ - vim-js-file-import https://github.com/kristijanhusak/vim-js-file-import
