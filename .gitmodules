@@ -94,3 +94,6 @@
 [submodule "vim/pack/pluginRepos/start/vim-js-file-import"]
 	path = vim/pack/pluginRepos/start/vim-js-file-import
 	url = https://github.com/kristijanhusak/vim-js-file-import
+[submodule "vim/pack/pluginRepos/start/vim-virtualenv"]
+	path = vim/pack/pluginRepos/start/vim-virtualenv
+	url = https://github.com/plytophogy/vim-virtualenv.git
