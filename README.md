@@ -116,6 +116,8 @@ git submodule update --init --recursive
  - previm https://github.com/kannokanno/previm.git
  - cheat.sh vim/UltiSnips/javascript.snippets
  - codi https://github.com/metakirby5/codi.vim.git
+ - vim-virtualenv https://github.com/plytophogy/vim-virtualenv
+ - vCoolor https://github.com/KabbAmine/vCoolor.vim.git
 
 # new plugins
  - https://github.com/mh21/errormarker.vim

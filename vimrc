@@ -472,8 +472,8 @@ set exrc
 set secure
 
 " yapf support
-autocmd FileType python nnoremap <leader>y :0,$!/home/mkreim/.virtualenvs/ssf/bin/yapf<Cr><C-o>
-autocmd BufWritePre *.py 0,$!/home/mkreim/.virtualenvs/ssf/bin/yapf
+autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr><C-o>
+autocmd BufWritePre *.py 0,$!yapf
 
 " prettier
 " max line length that prettier will wrap on
@@ -508,7 +508,9 @@ let g:UltiSnipsSnippetsDir="/home/mkreim/config/vim8config/vim/UltiSnips/"
 "let g:ale_lint_on_save=0
 "let g:ale_lint_on_filetype_changed=0
 "let g:ale_lint_on_insert_leave=0
-"let g:ale_linters = {'python': ['/home/mkreim/.virtualenvs/ssf/bin/yapf'], 'javascript': ['prettier']}
+" let g:ale_python_yapf_use_global=0
+" let g:ale_python_yapf_executable="yapf"
+let g:ale_linters = {'python': ['flake8']}
 
 
 " completor

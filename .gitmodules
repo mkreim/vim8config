@@ -97,3 +97,6 @@
 [submodule "vim/pack/pluginRepos/start/vim-virtualenv"]
 	path = vim/pack/pluginRepos/start/vim-virtualenv
 	url = https://github.com/plytophogy/vim-virtualenv.git
+[submodule "vim/pack/pluginRepos/start/vCoolor"]
+	path = vim/pack/pluginRepos/start/vCoolor
+	url = https://github.com/KabbAmine/vCoolor.vim.git
