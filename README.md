@@ -118,6 +118,7 @@ git submodule update --init --recursive
  - codi https://github.com/metakirby5/codi.vim.git
  - vim-virtualenv https://github.com/plytophogy/vim-virtualenv
  - vCoolor https://github.com/KabbAmine/vCoolor.vim.git
+ - traces https://github.com/markonm/traces.vim.git
 
 # new plugins
  - https://github.com/mh21/errormarker.vim

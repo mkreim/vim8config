@@ -100,3 +100,6 @@
 [submodule "vim/pack/pluginRepos/start/vCoolor"]
 	path = vim/pack/pluginRepos/start/vCoolor
 	url = https://github.com/KabbAmine/vCoolor.vim.git
+[submodule "vim/pack/pluginRepos/start/traces"]
+	path = vim/pack/pluginRepos/start/traces
+	url = https://github.com/markonm/traces.vim.git
