@@ -119,6 +119,7 @@ git submodule update --init --recursive
  - vim-virtualenv https://github.com/plytophogy/vim-virtualenv
  - vCoolor https://github.com/KabbAmine/vCoolor.vim.git
  - traces https://github.com/markonm/traces.vim.git
+ - vim-multiple-cursors https://github.com/terryma/vim-multiple-cursors.git
 
 # new plugins
  - https://github.com/mh21/errormarker.vim
