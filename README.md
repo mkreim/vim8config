@@ -120,6 +120,7 @@ git submodule update --init --recursive
  - vCoolor https://github.com/KabbAmine/vCoolor.vim.git
  - traces https://github.com/markonm/traces.vim.git
  - vim-multiple-cursors https://github.com/terryma/vim-multiple-cursors.git
+ - vim-TODO-lists https://github.com/aserebryakov/vim-todo-lists.git
 
 # new plugins
  - https://github.com/mh21/errormarker.vim

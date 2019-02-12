@@ -106,3 +106,6 @@
 [submodule "vim/pack/pluginRepos/start/vim-multiple-cursors"]
 	path = vim/pack/pluginRepos/start/vim-multiple-cursors
 	url = https://github.com/terryma/vim-multiple-cursors.git
+[submodule "vim/pack/pluginRepos/start/vim-todo-lists"]
+	path = vim/pack/pluginRepos/start/vim-todo-lists
+	url = https://github.com/aserebryakov/vim-todo-lists.git
