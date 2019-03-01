@@ -74,15 +74,15 @@
     nmap _ <C-T>
     map <F2> :set spell!<CR><Bar>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>
     imap <F2> <ESC>:set spell!<CR><Bar>:echo "Spell check: " . strpart("OffOn", 3 * &spell, 3)<CR>A
-    source ~/config/vim8config/SendToTmux/SendToTmux.vim
-    map <F12>  <ESC>:wa<CR>:call SendCMDToTmuxSession()<CR>
+    " source ~/config/vim8config/SendToTmux/SendToTmux.vim
+    " map <F12>  <ESC>:wa<CR>:call SendCMDToTmuxSession()<CR>
     "map <F11>  <ESC>:wa<CR>:call SendCurrentLineToTmuxSession()<CR>
     "map <F10>  <ESC>:wa<CR>:call SendCurrentLineToTmuxSession()<CR>
-    imap <F12>  <ESC>:wa<CR>:call SendCMDToTmuxSession()<CR>
+    " imap <F12>  <ESC>:wa<CR>:call SendCMDToTmuxSession()<CR>
     "imap <F11>  <ESC>:wa<CR>:call SendCurrentLineToTmuxSession()<CR>
     "imap <F10>  <ESC>:wa<CR>:call SendCurrentLineToTmuxSession()<CR>
-    map <F5> :wa<CR>:!reload-chrome.sh<CR>
-    imap <F5> <ESC>:wa<CR>:!reload-chrome.sh<CR>
+    " map <F5> :wa<CR>:!reload-chrome.sh<CR>
+    " imap <F5> <ESC>:wa<CR>:!reload-chrome.sh<CR>
 
     source ~/config/vim8config/MyCpp/MyCpp.vim
     "iab irev <C-R>=MyReviewComment()<CR>
@@ -90,8 +90,8 @@
     " C / C++ development
     map  <F8> <ESC>:TlistToggle<CR>
     imap <F8> <ESC>:TlistToggle<CR>
-    map  <F7> <ESC>:w<CR>:FSSplitAbove<CR>
-    imap <F7> <ESC>:w<CR>:FSSplitAbove<CR>
+    " map  <F7> <ESC>:w<CR>:FSSplitAbove<CR>
+    " imap <F7> <ESC>:w<CR>:FSSplitAbove<CR>
     "map  <F4> <ESC>:tabnew<CR>:Project<CR>
     "imap <F4> <ESC>:tabnew<CR>:Project<CR>
     
