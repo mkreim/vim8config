@@ -122,6 +122,7 @@ git submodule update --init --recursive
  - vim-multiple-cursors https://github.com/terryma/vim-multiple-cursors.git
  - vim-TODO-lists https://github.com/aserebryakov/vim-todo-lists.git
  - vdebug https://github.com/vim-vdebug/vdebug.git
+ - vim-gitgutter https://github.com/airblade/vim-gitgutter.git
 
 # new plugins
  - https://github.com/mh21/errormarker.vim

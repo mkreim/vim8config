@@ -109,3 +109,6 @@
 [submodule "vim/pack/pluginRepos/start/vim-todo-lists"]
 	path = vim/pack/pluginRepos/start/vim-todo-lists
 	url = https://github.com/aserebryakov/vim-todo-lists.git
+[submodule "vim/pack/pluginRepos/start/vim-gitgutter"]
+	path = vim/pack/pluginRepos/start/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
