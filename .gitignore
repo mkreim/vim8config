@@ -9,6 +9,7 @@
 # editor temp files
 .*.swp
 *.*~
+tags
 
 # latex temp files
 *.aux
