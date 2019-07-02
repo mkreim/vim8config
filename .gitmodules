@@ -115,3 +115,6 @@
 [submodule "vim/pack/pluginRepos/start/rust-lang"]
 	path = vim/pack/pluginRepos/start/rust-lang
 	url = https://github.com/rust-lang/rust.vim
+[submodule "vim/pack/pluginRepos/start/neomake"]
+	path = vim/pack/pluginRepos/start/neomake
+	url = https://github.com/neomake/neomake.git
