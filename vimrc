@@ -472,7 +472,7 @@ set exrc
 set secure
 
 " yapf support
-autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr><C-o>
+" autocmd FileType python nnoremap <leader>y :0,$!yapf<Cr><C-o>
 autocmd BufWritePre *.py 0,$!yapf
 
 " prettier
@@ -526,6 +526,15 @@ augroup PrevimSettings
     autocmd!
     autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 augroup END
+
+
+fun! Search(...)
+    let l:query = substitute(join(a:000,'+'), " ", "+", "g")
+    execute '!google-chrome --new-window https://www.ecosia.org/search?q='.expand(l:query)
+endfunction
+
+command! -nargs=* Search call Search( '<args>' )
+
 
 
 " Load all plugins now.
