@@ -112,3 +112,6 @@
 [submodule "vim/pack/pluginRepos/start/vim-gitgutter"]
 	path = vim/pack/pluginRepos/start/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
+[submodule "vim/pack/pluginRepos/start/rust-lang"]
+	path = vim/pack/pluginRepos/start/rust-lang
+	url = https://github.com/rust-lang/rust.vim
