@@ -118,3 +118,6 @@
 [submodule "vim/pack/pluginRepos/start/neomake"]
 	path = vim/pack/pluginRepos/start/neomake
 	url = https://github.com/neomake/neomake.git
+[submodule "vim/pack/pluginRepos/start/abolish"]
+	path = vim/pack/pluginRepos/start/abolish
+	url = https://github.com/tpope/vim-abolish.git
