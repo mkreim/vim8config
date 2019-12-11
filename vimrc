@@ -535,6 +535,48 @@ endfunction
 
 command! -nargs=* Search call Search( '<args>' )
 
+" rust
+let g:rustfmt_autosave = 1
+
+" Neomake
+" Gross hack to stop Neomake running when exitting because
+" it creates a zombie cargo check process
+" which holds the lock and never exits. But then, 
+" if you only have QuitPre, closing one pane will
+" disable neomake, so BufEnter reenables when you enter another buffer.
+let s:quitting = 0
+au QuitPre *.rs let s:quitting = 1
+au BufEnter *.rs let s:quitting = 0
+au BufWritePost *.rs if ! s:quitting | Neomake | else | echom "Neomake disabled"| endif
+let g:neomake_warning_sign = {'text': '?'}
+
+function! MyOnBattery()
+    return readfile('/sys/class/power_supply/AC/online') == ['0']
+endfunction
+
+" if MyOnBattery()
+    " call neomake#configure#automake('w')
+" else
+    " call neomake#configure#automake('nw', 1000)
+" endif
+
+let g:neomake_open_list = 2
+
+" stored search patterns
+" ----------------------
+" Do the search. Decide you might want to use that one again. Type this literally:
+" :sp ~/.regexlist.vim<CR>
+" olet MyRegExName = '<C-R>/'<ESC>
+" :w<CR>
+" :so %<CR>
+" :q<CR>
+" Where <C-R> is CtrlR, <CR> is ENTER and <ESC> is ESC.
+"
+" Next time you want to use it:
+" /<C-R>=MyRegExName<CR><CR>
+"
+" https://stackoverflow.com/a/2201584
+source ~/config/vim8config/searchpatterns.vim
 
 
 " Load all plugins now.
