@@ -77,3 +77,26 @@ componentDidUpdate(prevProps, prevState) {
 	}
 }
 endsnippet
+
+snippet addUseEffect "add react hook template for useEffect"
+useEffect(() => {${1}}, [${2}]);
+endsnippet
+
+snippet addUseMemo "add react hook template for useMemo"
+useMemo(() => ${1}, [${2}]);
+endsnippet
+
+snippet addUseCallback "add react hook template for useCallback"
+useCallback((${1}) => ${2}, [${3}]);
+endsnippet
+
+snippet addUseState "add react hook template for useState"
+const [${1}, set$1] = useState(${2});
+endsnippet
+
+snippet addComponent "add template for new componentn"
+function ${1:`vim_snippets#Filename('$1', 'name')`}({${2}}) {
+	// TODO
+}
+export default memo($1);
+endsnippet
