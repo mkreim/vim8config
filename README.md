@@ -130,3 +130,4 @@ git submodule update --init --recursive
  - YouCompleteMe https://valloric.github.io/YouCompleteMe/
  - vim-gutentags https://github.com/ludovicchabant/vim-gutentags
  - vim-js-file-import https://github.com/kristijanhusak/vim-js-file-import
+ - fzf.vim https://github.com/junegunn/fzf.vim

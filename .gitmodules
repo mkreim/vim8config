@@ -121,3 +121,6 @@
 [submodule "vim/pack/pluginRepos/start/abolish"]
 	path = vim/pack/pluginRepos/start/abolish
 	url = https://github.com/tpope/vim-abolish.git
+[submodule "vim/pack/pluginRepos/start/fzf.vim"]
+	path = vim/pack/pluginRepos/start/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
