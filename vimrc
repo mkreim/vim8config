@@ -579,10 +579,20 @@ let g:neomake_open_list = 2
 source ~/config/vim8config/searchpatterns.vim
 
 
+" agrep config
+" ------------
+let g:agrep_default_flags = '-I --exclude-dir={.git,__pycache__,mysql-data,node_modules,dist} --exclude="tags" --exclude="*.json" --exclude="*.map" --exclude="*.chunk.js" --exclude="spsSampleDataLong.js" --exclude="spsSampleData.js" --exclude="*.log*" -r -i'
+
+" fun
+    map <leader>fn :set guifont=DejaVu\ Sans\ Mono\ 12<CR>
+    map <leader>fh :set guifont=Calligraphr\ 12<CR>
+
 " Load all plugins now.
 " Plugins need to be added to runtimepath before helptags can be generated.
 packloadall
 " Load all of the helptags now, after plugins have been loaded.
 " All messages and errors will be ignored.
 silent! helptags ALL
+
+
 " --- EOF ---

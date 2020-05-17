@@ -25,6 +25,13 @@ elseif hostname() == 'netsyno-terra-01'
     set background=light
     colorscheme solarized
     winpos 900 0
+elseif hostname() == 'netsyno-mk'
+    set lines=60 columns=100
+    set gfn=DejaVu\ Sans\ Mono\ 13
+    syntax enable
+    set background=light
+    colorscheme solarized
+    winpos 900 0
 else
     set lines=30 columns=100
     set gfn=DejaVu\ Sans\ Mono\ 12
