@@ -420,11 +420,11 @@ map <leader>td <Plug>TaskList
 " http://meineartikel.labs.nzz.ch/user/aengus/id/1qxbh
 " http://sontek.net/turning-vim-into-a-modern-python-ide#id21
 let g:pyflakes_use_quickfix = 0
-let g:pep8_map='<leader>8'
+" let g:pep8_map='<leader>8'
 au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
-map <leader>n :NERDTreeTabsToggle<CR>
+" map <leader>n :NERDTreeTabsToggle<CR>
 map <F10>  :NERDTreeTabsToggle<CR>
 imap <F10> <Esc>:NERDTreeTabsToggle<CR>
 " I also included the py.test vim plugin for those who prefer it. 
@@ -432,13 +432,13 @@ imap <F10> <Esc>:NERDTreeTabsToggle<CR>
 " individual tests by class, file, or method. You can also cycle
 " through the individual assertion errors.
 " Execute the tests
-nmap <silent><Leader>tf <Esc>:Pytest file<CR>
-nmap <silent><Leader>tc <Esc>:Pytest class<CR>
-nmap <silent><Leader>tm <Esc>:Pytest method<CR>
+" nmap <silent><Leader>tf <Esc>:Pytest file<CR>
+" nmap <silent><Leader>tc <Esc>:Pytest class<CR>
+" nmap <silent><Leader>tm <Esc>:Pytest method<CR>
 " cycle through test errors
-nmap <silent><Leader>tn <Esc>:Pytest next<CR>
-nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
-nmap <silent><Leader>te <Esc>:Pytest error<CR>
+" nmap <silent><Leader>tn <Esc>:Pytest next<CR>
+" nmap <silent><Leader>tp <Esc>:Pytest previous<CR>
+" nmap <silent><Leader>te <Esc>:Pytest error<CR>
 
 " vim-online-thesaurus
 let g:online_thesaurus_map_keys = 0
@@ -448,7 +448,7 @@ noremap <Leader>T :OnlineThesaurusLookup<CR>
 " http://majutsushi.github.io/tagbar/
 " https://github.com/majutsushi/tagbar
 nmap <F9> :TagbarToggle<CR>
-let g:tagbar_left = 1
+let g:tagbar_left = 0
 let g:tagbar_width = 50
 let g:tagbar_compact = 0
 
@@ -464,7 +464,7 @@ let g:tagbar_compact = 0
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 
-:map <Leader>c :make<CR>
+" :map <Leader>c :make<CR>
 
 " C++ stuff
 " http://www.alexeyshmalko.com/2014/using-vim-as-c-cpp-ide/
@@ -500,6 +500,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-g>"
 let g:UltiSnipsEditSplit="vertical"
 
 let g:UltiSnipsSnippetsDir="/home/mkreim/config/vim8config/vim/UltiSnips/"
+let g:UltiSnipsUsePythonVersion = 3 
 
 
 " ale
@@ -517,7 +518,7 @@ let g:ale_linters = {'python': ['flake8']}
 let g:completor_python_binary = '/home/mkreim/.virtualenvs/vim-tools/bin/python'
 let g:completor_node_binary = '/home/mkreim/.nvm/versions/node/v8.11.1/bin/node'
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 
 " previm
@@ -584,8 +585,45 @@ source ~/config/vim8config/searchpatterns.vim
 let g:agrep_default_flags = '-I --exclude-dir={.git,__pycache__,mysql-data,node_modules,dist} --exclude="tags" --exclude="*.json" --exclude="*.map" --exclude="*.chunk.js" --exclude="spsSampleDataLong.js" --exclude="spsSampleData.js" --exclude="*.log*" -r -i'
 
 " fun
-    map <leader>fn :set guifont=DejaVu\ Sans\ Mono\ 12<CR>
+    map <leader>fn :set guifont=DejaVu\ Sans\ Mono\ 13<CR>
     map <leader>fh :set guifont=Calligraphr\ 12<CR>
+    " map <leader>fa :set guifont=Atkinson\ 12<CR>
+
+" -------------------------------
+" FZF
+" -------------------------------
+" runtime path
+set rtp+=/home/mkreim/bin/fzf
+nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <Leader>s :Rg<CR>
+set grepprg=rg\ --vimgrep\ --smart-case\ --follow
+" -------------------------------
+
+" -------------------------------------------------------------------------------------------------
+"  terminals
+" -------------------------------------------------------------------------------------------------
+map <leader>n :terminal node<CR>
+map <Leader>c :terminal<CR>
+" -------------------------------------------------------------------------------------------------
+
+" -------------------------------------------------------------------------------------------------
+" apply settings on project files in directory
+" -------------------------------------------------------------------------------------------------
+" To minimize security risks with ANY "autorun" features for ANYTHING these days, 
+" may I advise you to utilize vim's existing features instead of plugins (portability baggage)?
+" My local folder's vimrc file is named "_gvimrc" (on purpose).
+" In my $VIM/.vimrc file, I inserted:
+if filereadable(".mk_project.vimrc")
+    source .mk_project.vimrc
+endif
+" at the end.
+" Of course, you can give your own unique filename to obfuscate potential trouble-makers further. 
+" You just need to settle on one standardized name and source it accordingly in your $VIM/.vimrc. 
+" Relying on vi/vim internals for this rules out portability issues. 
+" BUT, DO NOT name it .vimrc (or _vimrc) to prevent recursive sourcing in 
+" case you're editing the $VIM/.vimrc file with vim later.
+" FROM: https://stackoverflow.com/a/13192721
+" -------------------------------------------------------------------------------------------------
 
 " Load all plugins now.
 " Plugins need to be added to runtimepath before helptags can be generated.
