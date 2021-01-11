@@ -124,3 +124,6 @@
 [submodule "vim/pack/pluginRepos/start/vim-peekaboo"]
 	path = vim/pack/pluginRepos/start/vim-peekaboo
 	url = https://github.com/junegunn/vim-peekaboo.git
+[submodule "vim/pack/pluginRepos/opt/ultisnips"]
+	path = vim/pack/pluginRepos/opt/ultisnips
+	url = https://github.com/SirVer/ultisnips.git
